@@ -1,5 +1,6 @@
 using System;
 using Unity.Burst.CompilerServices;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,9 +25,6 @@ public class EntityVisual : MonoBehaviour
     private float _rotationSpeed = 30f;
     private Vector3 _currentRotation;
 
-    [SerializeField] float dampingTime = 0.3f;
-    private float zVelocity = 0f;      
-
     public Vector3 Offset;
     public Vector3 Tilt;
 
@@ -46,27 +44,17 @@ public class EntityVisual : MonoBehaviour
         Follow();
     }
 
+    private void Rotate()
+    {
+        var movement = (transform.position.x - _entity.transform.position.x) * Time.deltaTime;
 
-private void Rotate()
-{
-    float movement = (transform.position.x - _entity.transform.position.x) * Time.deltaTime;
-    float targetZ = movement * _rotationSpeed;
+        float angle = _rotationSpeed * movement;
+    
+        _currentRotation.z = Mathf.Lerp(_currentRotation.z, angle, _rotationSpeed * Time.deltaTime);
+        _currentRotation.z = Mathf.Clamp(_currentRotation.z, -60, 60);
 
-    float smoothedZ = Mathf.SmoothDampAngle(
-        _currentRotation.z,    
-        targetZ,               
-        ref zVelocity,         
-        dampingTime            
-    );
-
-    _currentRotation.z = Mathf.Clamp(smoothedZ, -60f, 60f);
-
-    transform.localRotation = Quaternion.Euler(
-        transform.localRotation.eulerAngles.x,
-        transform.localRotation.eulerAngles.y,
-        _currentRotation.z + Tilt.z
-    );
-}
+        transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, _currentRotation.z + Tilt.z);
+    }
 
     private void Follow()
     {
