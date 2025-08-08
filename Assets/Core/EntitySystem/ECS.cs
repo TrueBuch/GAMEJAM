@@ -2,25 +2,25 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class ECS
 {
+    public EntityObject Spawn(Entity entity)
+    {
+
+        var entityObject = UnityEngine.Object.Instantiate(entity.Get<TagView>().Prefab).GetComponent<EntityObject>();
+        entityObject.Initialize(entity);
+
+        return entityObject;
+    }
+
+    public EntityObject Spawn(string id)
+    {
+        var entity = Get<Entity>(id);
+        return Spawn(entity);
+    }
+
     public EntityTable<Entity> entityTable = new();
-
-    public Entity Spawn(Entity entity)
-    {
-        var obj = UnityEngine.Object.Instantiate(entity);
-
-        if (obj.Has<TagDraggable>()) obj.AddComponent<Draggable>();
-        if (obj.Has<TagSelectable>()) obj.AddComponent<Selectable>();
-        return obj;
-    }
-
-    public Entity Spawn(string id)
-    {
-        return Spawn(Get(id));
-    }
 
     public void Init()
     {
@@ -29,8 +29,22 @@ public class ECS
 
     private void AddAll()
     {
-        var entities = Resources.LoadAll<Entity>("Entities");
-        foreach (var entity in entities) entityTable.Add(entity);
+        var allTypes = Util.Reflection.FindAllSubclasses<Entity>();
+
+        foreach (var type in allTypes)
+        {
+            if (Activator.CreateInstance(type) is Entity entity) entityTable.Add(entity);
+        }
+
+        var resources = Resources.LoadAll<EntityPrefab>("Entities");
+        foreach (var prefab in resources)
+        {
+            var entity = new Entity();
+            entity.ID = prefab.ID;
+            entity.Set(prefab.Components);
+
+            entityTable.Add(entity);
+        }
     }
 
     public Entity Get(string id)
@@ -98,6 +112,76 @@ public class EntityTable<T> where T : Entity
     }
 }
 
+public class Entity
+{
+    public string ID;
+
+    [SerializeReference] private Dictionary<Type, Tag> _components = new();
+
+    public T Define<T>() where T : Tag, new()
+    {
+        var type = typeof(T);
+        if (!_components.ContainsKey(type))
+        {
+            var instance = new T();
+            _components[type] = instance;
+        }
+
+        return (T)_components[type];
+    }
+
+    public T Get<T>() where T : Tag
+    {
+        if (_components.TryGetValue(typeof(T), out var component))
+            return (T)component;
+
+        return null;
+    }
+
+    public bool Has<T>() where T : Tag
+    {
+        return _components.ContainsKey(typeof(T));
+    }
+
+    public void Remove<T>() where T : Tag
+    {
+        _components.Remove(typeof(T));
+    }
+
+    public void Set(List<Tag> components)
+    {
+        _components.Clear();
+
+        foreach (var component in components)
+        {
+            var type = component.GetType();
+            _components[type] = component;
+        }
+    }
+
+    public Entity Clone()
+    {
+        var clone = new Entity();
+        clone.ID = ID;
+
+        foreach (var tag in _components)
+        {
+            if (tag.Value is ICloneableTag cloneable)
+            {
+                clone._components[tag.Key] = cloneable.Clone();
+            }
+            else
+            {
+                clone._components[tag.Key] = tag.Value;
+            }
+        }
+
+        return clone;
+    }
+}
+
 [Serializable]
 public abstract class Tag
 {}
+
+public interface ICloneableTag {public Tag Clone();}

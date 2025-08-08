@@ -1,23 +1,19 @@
 using System;
 using Unity.Burst.CompilerServices;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EntityVisual : MonoBehaviour
+public class EntityObjectVisual : MonoBehaviour
 {
-
-
-    private float _moveSpeed;
-    private Entity _entity;
-    public Entity Entity => _entity;
+    private int _moveSpeed;
+    private EntityObject _entityObject;
+    public EntityObject EntityObject => _entityObject;
 
     [SerializeField] private RectTransform _body;
     public RectTransform Body => _body;
     
     [SerializeField] private Image _sprite;
     public Image Sprite => _sprite;
-
     [SerializeField] private Image _shadow;
     public Image Shadow => _shadow;
 
@@ -28,12 +24,12 @@ public class EntityVisual : MonoBehaviour
     public Vector3 Offset;
     public Vector3 Tilt;
 
-    public void Initialize(Entity entity)
+    public void Initialize(EntityObject entityObject)
     {
-        _entity = entity;
-        var tagView = _entity.Get<TagView>();
+        _entityObject = entityObject;
+        var tagView = _entityObject.Entity.Get<TagView>();
 
-        _moveSpeed = tagView.FollowSpeed;
+        _moveSpeed = tagView.VisualMoveSpeed;
         _sprite.sprite = tagView.Sprite;
         _shadow.sprite = tagView.Shadow;
     }
@@ -46,11 +42,10 @@ public class EntityVisual : MonoBehaviour
 
     private void Rotate()
     {
-        var movement = (transform.position.x - _entity.transform.position.x) * Time.deltaTime;
+        var movement = (transform.position.x - _entityObject.transform.position.x) * Time.deltaTime;
+        var movementRotation = movement * _rotationSpeed;
 
-        float angle = _rotationSpeed * movement;
-    
-        _currentRotation.z = Mathf.Lerp(_currentRotation.z, angle, _rotationSpeed * Time.deltaTime);
+        _currentRotation.z = Mathf.Lerp(_currentRotation.z, movementRotation, _rotationSpeed * Time.deltaTime);
         _currentRotation.z = Mathf.Clamp(_currentRotation.z, -60, 60);
 
         transform.localRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, _currentRotation.z + Tilt.z);
@@ -58,7 +53,7 @@ public class EntityVisual : MonoBehaviour
 
     private void Follow()
     {
-        var targetPosition = _entity.transform.position + Offset;
+        var targetPosition = _entityObject.transform.position + Offset;
         var distance = Vector2.Distance(transform.position, targetPosition);
 
         if (distance < 0.1f)
