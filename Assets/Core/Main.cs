@@ -83,8 +83,6 @@ public class Main : MonoBehaviour
 
         foreach (var type in allTypes) if (Activator.CreateInstance(type) is ISingleton singleton) Register(singleton);
         foreach (var singleton in allMono) Register(singleton);
-
-        Debug.Log($"[Main] Registered {All.Count}"); 
     }
 
     private void InitializeAll()
