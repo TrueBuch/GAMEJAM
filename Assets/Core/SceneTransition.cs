@@ -24,11 +24,11 @@ public class SceneTransition : MonoBehaviour
 
     private void Awake()
     {
-        if (Main.SceneTransition != null && Main.SceneTransition != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        // if (Main.SceneTransition != null && Main.SceneTransition != this)
+        // {
+        //     Destroy(gameObject);
+        //     return;
+        // }
         GeneratePixels();
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -90,7 +90,6 @@ public class SceneTransition : MonoBehaviour
 
     private IEnumerator PlayAnimation(bool isClosing)
     {
-
         int cols = _pixels.GetLength(0);
         int rows = _pixels.GetLength(1);
 
@@ -98,7 +97,7 @@ public class SceneTransition : MonoBehaviour
 
         int diagCount = (cols - 1) + (rows - 1) + 1;
 
-        float totalDuration = 1f / Main.GameConfig.GameSpeed;
+        float totalDuration = 0.5f;
         float delay = totalDuration / diagCount;
         for (int d = max; d >= 0; d--)
         {

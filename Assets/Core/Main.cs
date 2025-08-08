@@ -11,8 +11,8 @@ public class Main : MonoBehaviour
     private GameConfig _gameConfig;
     public static GameConfig GameConfig => Instance._gameConfig;
 
-    private SceneTransition _sceneTransition;
-    public static SceneTransition SceneTransition => Instance._sceneTransition;
+    //private SceneTransition _sceneTransition;
+    //public static SceneTransition SceneTransition => Instance._sceneTransition;
 
     private ECS esc;
     public static ECS ESC => Instance.esc;
@@ -44,7 +44,7 @@ public class Main : MonoBehaviour
         var gameObject = new GameObject("Main");
         Instance = gameObject.AddComponent<Main>();
         Instance._gameConfig = Resources.Load<GameConfig>("GameConfig");
-        Instance._sceneTransition = Instantiate(Content.SceneTransition).GetComponent<SceneTransition>();
+        //Instance._sceneTransition = Instantiate(Content.SceneTransition).GetComponent<SceneTransition>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -103,7 +103,7 @@ public class Main : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        Destroy(_sceneTransition);
+        //Destroy(_sceneTransition);
         Instance = null;
     }
     public bool IsRegistered<T>() where T : ISingleton => All.ContainsKey(typeof(T));
