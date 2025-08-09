@@ -7,6 +7,7 @@ public static class Content
     public static GameObject SceneTransition => Load<GameObject>("Main/SceneTransition");
 
     public static AudioClip AudioNoise => Load<AudioClip>("Audio/Noise");
+    public static AudioClip AudioZnaesh => Load<AudioClip>("Audio/ZNAESH");
 
     private static T Load<T>(string path) where T : Object
     {
