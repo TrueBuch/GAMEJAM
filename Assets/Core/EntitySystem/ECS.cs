@@ -5,21 +5,6 @@ using System.Linq;
 
 public class ECS
 {
-    public EntityObject Spawn(Entity entity)
-    {
-
-        var entityObject = UnityEngine.Object.Instantiate(entity.Get<TagView>().Prefab).GetComponent<EntityObject>();
-        entityObject.Initialize(entity);
-
-        return entityObject;
-    }
-
-    public EntityObject Spawn(string id)
-    {
-        var entity = Get<Entity>(id);
-        return Spawn(entity);
-    }
-
     public EntityTable<Entity> entityTable = new();
 
     public void Init()

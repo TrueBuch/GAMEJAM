@@ -52,14 +52,14 @@
     <Compile Include="Assets\Core\Input\Input.cs" />
     <Compile Include="Assets\Core\EntitySystem\ECS.cs" />
     <Compile Include="Assets\Core\Components\Selectable.cs" />
-    <Compile Include="Assets\Core\EntitySystem\EntityVisual.cs" />
     <Compile Include="Assets\Core\VFX.cs" />
     <Compile Include="Assets\Core\Main.cs" />
-    <Compile Include="Assets\Core\EntitySystem\Entity.cs" />
+    <Compile Include="Assets\Scripts\Tuning.cs" />
     <Compile Include="Assets\Core\Input\PlayerInput.cs" />
     <Compile Include="Assets\Core\Util\GameMath.cs" />
     <Compile Include="Assets\Core\GameConfig.cs" />
     <Compile Include="Assets\Core\EventSystem.cs" />
+    <Compile Include="Assets\Core\EntitySystem\EntityPrefab.cs" />
     <Compile Include="Assets\Core\SceneTransition.cs" />
     <Compile Include="Assets\Core\Util\Reflection.cs" />
     <Compile Include="Assets\Core\Util\Text.cs" />

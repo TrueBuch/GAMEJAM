@@ -9,10 +9,6 @@ public class Game : MonoBehaviour, ISingleton
 
     public void Start()
     {
-        var obj = Main.ESC.Spawn("GameObject");
-        obj.transform.SetParent(_container);
-        obj.transform.localPosition = Vector3.zero;
-        var visual = obj.SpawnVisual();
-        if (visual != null) visual.transform.SetParent(_containerVisual);
+
     }
 }
