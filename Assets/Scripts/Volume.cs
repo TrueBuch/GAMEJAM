@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Tuning : MonoBehaviour, IDraggable
+public class Volume : MonoBehaviour, IDraggable
 {
     [SerializeField] private Radio _radio;
     [SerializeField] private float _sensivity;
     [SerializeField] private float _rotationSensivity;
 
-    private float _currentValue;
+    [SerializeField] private float _currentValue;
     public float CurrentValue => _currentValue;
 
     private bool _isCanDragging;
@@ -30,6 +30,7 @@ public class Tuning : MonoBehaviour, IDraggable
 
         var delta = input.MouseDelta.x * Time.deltaTime;
         _currentValue += delta * _sensivity;
+        Mathf.Clamp(_currentValue, 0, 1);
         _currentRotation.z -= delta * _rotationSensivity;
 
         transform.localRotation = Quaternion.Euler(_currentRotation);
