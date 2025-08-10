@@ -6,6 +6,8 @@ public static class Content
 {
     public static GameObject SceneTransition => Load<GameObject>("Main/SceneTransition");
 
+    public static AudioClip AudioSamo => Load<AudioClip>("Audio/SAMO");
+    public static AudioClip AudioBandana => Load<AudioClip>("Audio/BANDANA");
     public static AudioClip AudioNoise => Load<AudioClip>("Audio/Noise");
     public static AudioClip AudioZnaesh => Load<AudioClip>("Audio/ZNAESH");
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Volume : MonoBehaviour, IDraggable
+public class Volume : MonoBehaviour, ISelectable
 {
     [SerializeField] private Radio _radio;
     [SerializeField] private float _sensivity;
@@ -10,31 +10,44 @@ public class Volume : MonoBehaviour, IDraggable
     [SerializeField] private float _currentValue;
     public float CurrentValue => _currentValue;
 
-    private bool _isCanDragging;
-
     private Vector3 _currentRotation;
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        var input = Main.Get<Input>();
+    private bool _isHovering;
 
-        _isCanDragging = Vector2.Distance(transform.position, input.MousePosition) < 100f;
+    private Input _input;
+
+    public void Init()
+    {
+        _input = Main.Get<Input>();
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private void Update()
     {
+        UpdateValue();
+    }
+    public void UpdateValue()
+    {
+        if (!_isHovering) return;
 
-        if (!_isCanDragging) return;
-
-        var input = Main.Get<Input>();
-
-        var delta = input.MouseDelta.x * Time.deltaTime;
+        var delta = _input.Scroll.y;
         _currentValue += delta * _sensivity;
-        Mathf.Clamp(_currentValue, 0, 1);
+        _currentValue = Mathf.Clamp(_currentValue, 0, 1);
         _currentRotation.z -= delta * _rotationSensivity;
 
         transform.localRotation = Quaternion.Euler(_currentRotation);
     }
 
-    public void OnEndDrag(PointerEventData eventData) {}
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _isHovering = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _isHovering = false;
+    }
+
+    public void OnPointerDown(PointerEventData eventData) {}
+
+    public void OnPointerUp(PointerEventData eventData) {}
 }

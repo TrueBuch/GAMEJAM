@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Tuning : MonoBehaviour, IDraggable
+public class Tuning : MonoBehaviour, ISelectable
 {
     [SerializeField] private Radio _radio;
     [SerializeField] private float _sensivity;
@@ -10,30 +11,62 @@ public class Tuning : MonoBehaviour, IDraggable
     private float _currentValue;
     public float CurrentValue => _currentValue;
 
-    private bool _isCanDragging;
+    private bool _isHovering;
 
     private Vector3 _currentRotation;
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        var input = Main.Get<Input>();
+    private Input _input;
 
-        _isCanDragging = Vector2.Distance(transform.position, input.MousePosition) < 100f;
+    public void Init()
+    {
+        _input = Main.Get<Input>();
+        _radio.WaveChanged.AddListener(OnWaveChanged);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private void OnWaveChanged(Entity old, Entity wave)
     {
+        var newMin = wave.Get<TagWave>().Min;
+        var newMax = wave.Get<TagWave>().Max;
 
-        if (!_isCanDragging) return;
+        if (old != null)
+        {
+            var oldMin = old.Get<TagWave>().Min;
+            var oldMax = old.Get<TagWave>().Max;
 
-        var input = Main.Get<Input>();
+            _currentValue = newMin + (_currentValue - oldMin) / (oldMax - oldMin) * (newMax - newMin);
+        }
+        _currentValue = Mathf.Clamp(_currentValue, newMin, newMax);
 
-        var delta = input.MouseDelta.x * Time.deltaTime;
+    }
+
+    private void Update()
+    {
+        UpdateValue();
+    }
+
+    public void UpdateValue()
+    {
+        if (!_isHovering) return;
+
+        var delta = _input.Scroll.y;
         _currentValue += delta * _sensivity;
+        _currentValue = Mathf.Clamp(_currentValue, _radio.Wave.Get<TagWave>().Min, _radio.Wave.Get<TagWave>().Max);
         _currentRotation.z -= delta * _rotationSensivity;
 
         transform.localRotation = Quaternion.Euler(_currentRotation);
     }
 
-    public void OnEndDrag(PointerEventData eventData) {}
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _isHovering = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _isHovering = false;
+    }
+
+    public void OnPointerDown(PointerEventData eventData) {}
+
+    public void OnPointerUp(PointerEventData eventData) {}
 }

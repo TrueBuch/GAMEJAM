@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1831559842077164123}
   - component: {fileID: 159632188765127277}
   m_Layer: 0
-  m_Name: FM
+  m_Name: AM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,21 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01376d47966ae814a9fa7dc27510a34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _builtId: FM
+  _builtId: Wave/AM
   _components:
-  - rid: 2684597491175260238
+  - rid: 2684597491175260241
   references:
     version: 2
     RefIds:
-    - rid: 2684597491175260238
+    - rid: 2684597491175260241
       type: {class: TagWave, ns: , asm: Assembly-CSharp}
       data:
+        Min: 540
+        Max: 1600
         Clips:
-          rid: 2684597491175260239
-    - rid: 2684597491175260239
-      type: {class: 'SerializedDictionary`2[[UnityEngine.AudioClip, UnityEngine.AudioModule],[FloatRange, Assembly-CSharp]]', ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
-      data:
-        m_Keys:
-        - {fileID: 8300000, guid: 6979d369cef4c414589be91fcaf82fa7, type: 3}
-        m_Values:
-        - Range: {x: 4, y: 15}
+        - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
+        - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
+        Ranges:
+        - {x: 540, y: 1050}
+        - {x: 1051, y: 1600}
