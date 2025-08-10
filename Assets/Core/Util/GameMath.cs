@@ -19,7 +19,6 @@ namespace Util
 
         public static Vector3 RoundDirection(Vector3 direction)
         {
-
             float absX = Mathf.Abs(direction.x);
             float absY = Mathf.Abs(direction.y);
             float absZ = Mathf.Abs(direction.z);
@@ -28,5 +27,12 @@ namespace Util
             else if (absY > absX && absY > absZ) return direction.y > 0 ? Vector3.up : Vector3.down;
             else return direction.z > 0 ? Vector3.forward : Vector3.back;
         }
+
+        
+        public static float GetPercent(float value, float min, float max)
+        {
+            return (value - min) / (max - min);
+        }
+
     }
 }

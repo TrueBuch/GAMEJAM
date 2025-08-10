@@ -1,53 +1,111 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Events;
 
 public class Radio : MonoBehaviour
 {
+    [SerializeField] private WaveChanger _waveChanger;
     [SerializeField] private Volume _volume;
     [SerializeField] private Tuning _tuning;
 
-    private AudioSource _audioSource;
-    public AudioSource AudioSource => _audioSource;
+    [SerializeField] private AudioSource _noise;
 
+    private float _currentTime = 0f;
+    private Entity _wave;
+    public Entity Wave => _wave;
+
+    public AudioSource Noise => Noise;
+
+    private AudioSource _radio;
+    public AudioSource AudioSource => _radio;
+
+    public readonly UnityEvent<Entity, Entity> WaveChanged = new();
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.loop = true;
+        _radio = GetComponent<AudioSource>();
+        _radio.loop = true;
+        _noise.loop = true;
+        _noise.volume = 0f;
     }
 
     private void Start()
     {
-        _audioSource.clip = Content.AudioZnaesh;
-        _audioSource.volume = 0;
-        _audioSource.Play();
-        StartCoroutine(AAASFFFF());
+
+        _tuning.Init();
+        _volume.Init();
+        _waveChanger.Init();
+
+        ChangeWave(Main.ECS.Get("Wave/FM"));
+        ChangeClip();
+        _radio.volume = 0;
+        _radio.Play();
+
+        _noise.clip = Content.AudioNoise;
+        _noise.Play();
+
+        //StartCoroutine(Shake());
     }
 
     private void Update()
     {
-        var volume = _volume.CurrentValue;
+        _currentTime = Time.time;
+        _radio.volume = _volume.CurrentValue;
         var tuning = _tuning.CurrentValue;
 
-        //_audioSource.volume = volume;
+        Debug.Log(_tuning.CurrentValue);
+        ChangeClip();
     }
 
-    private IEnumerator AAASFFFF()
+    private IEnumerator Shake()
     {
         while (true)
         {
-            _audioSource.volume = 0f;
+            _radio.volume = 0f;
             yield return new WaitForSeconds(Random.Range(0.03f, 0.05f));
-            _audioSource.volume = _volume.CurrentValue;
+            _radio.volume = _volume.CurrentValue;
             yield return new WaitForSeconds(Random.Range(0.03f, 0.05f));
         }
+    }
+
+    private void ChangeClip()
+    {
+        var tagWave = Wave.Get<TagWave>();
+        int index = tagWave.Ranges
+        .Select((v, i) => new { Value = v, Index = i })
+        .FirstOrDefault(x => x.Value.x <= _tuning.CurrentValue && _tuning.CurrentValue <= x.Value.y)
+        ?.Index ?? -1;
+
+        var oldClip = _radio.clip;
+        var newClip = index == -1 ? null : tagWave.Clips[index];
+        if (oldClip != newClip)
+        {
+            if (newClip == null) return;
+            _radio.clip = newClip;
+            var time = _currentTime % newClip.length;
+            _radio.time = time;
+            _radio.Play();
+        }
+    }
+
+    public void ChangeWave(Entity wave)
+    {
+        var old = _wave;
+        _wave = wave;
+        WaveChanged.Invoke(old, _wave);
     }
 }
 
 public class TagWave : Tag
 {
-    [SerializeReference] SerializedDictionary<AudioClip, FloatRange> ClipsDON = new();
+    public float Min = 3f;
+    public float Max = 30f;
+
+    [HorizontalGroup] public List<AudioClip> Clips = new();
+    [MinMaxSlider(nameof(Min), nameof(Max), ShowFields = true)]
+    [HorizontalGroup] public List<Vector2Int> Ranges = new();
 }
 public class Waves
 {
@@ -58,15 +116,4 @@ public class Waves
 
     //ДИАПАЗОНЫ - АУДИОФАЙЛЫ
     //ПОМЕХИ
-}
-
-[System.Serializable]
-public struct FloatRange
-{
-    
-    [MinMaxSlider(3f, 30f, ShowFields = true)]
-    public Vector2Int Range;
-
-    public int Min => Range.x;
-    public int Max => Range.y;
 }

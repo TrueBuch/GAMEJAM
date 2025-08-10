@@ -14,6 +14,8 @@ public class Input : MonoBehaviour, ISingleton
 
     public readonly UnityEvent ReloadPerformed = new();
 
+    private Vector2 _scroll;
+    public Vector2 Scroll => _scroll;
     private Vector2 _mousePosition;
     public Vector2 MousePosition => _mousePosition;
 
@@ -41,6 +43,7 @@ public class Input : MonoBehaviour, ISingleton
 
     private void Update()
     {
+        _scroll = _playerInput.Player.Scroll.ReadValue<Vector2>();
         _mousePosition = _playerInput.Player.MousePosition.ReadValue<Vector2>();
 
         _mouseDelta = _playerInput.Player.MouseDelta.ReadValue<Vector2>();

@@ -14,8 +14,8 @@ public class Main : MonoBehaviour
     //private SceneTransition _sceneTransition;
     //public static SceneTransition SceneTransition => Instance._sceneTransition;
 
-    private ECS esc;
-    public static ECS ESC => Instance.esc;
+    private ECS ecs;
+    public static ECS ECS => Instance.ecs;
     
     private EventSystem eventSystem;
     public static EventSystem EventSystem => Instance.eventSystem;
@@ -69,8 +69,8 @@ public class Main : MonoBehaviour
 
         Instance = this;
         
-        Instance.esc = new();
-        Instance.esc.Init();
+        Instance.ecs = new();
+        Instance.ecs.Init();
         
         eventSystem = new();
         eventSystem.Initialize();
