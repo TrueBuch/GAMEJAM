@@ -2,15 +2,18 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
- 
+
 public class Notebook : MonoBehaviour, ISelectable
 {
     [SerializeField] private TMP_InputField _input;
     [SerializeField] private Vector3 _targetPosition;
-    [SerializeField] private Vector3 _startedPosition;
+    private Vector3 _startedPosition;
 
-    public void OnPointerDown(PointerEventData eventData) {}
+    private void Awake()
+    {
+        _startedPosition = transform.localPosition;
+    }
+    public void OnPointerDown(PointerEventData eventData) { }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -22,6 +25,7 @@ public class Notebook : MonoBehaviour, ISelectable
     {
         _input.DeactivateInputField();
         transform.DOLocalMove(_startedPosition, 1f);
+        
     }
 
     public void OnPointerUp(PointerEventData eventData) { }

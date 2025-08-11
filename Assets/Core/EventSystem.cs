@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class EventSystem
+public class GameEventSystem
 {
     private List<Event> events = new();
     public IReadOnlyList<Event> Events => events;
@@ -24,7 +24,7 @@ public static class EventCache<T>
 {
     private static List<T> events;
 
-    public static List<T> FindAll(EventSystem eventSystem)
+    public static List<T> FindAll(GameEventSystem eventSystem)
     {
         if (events != null)
             return events;
