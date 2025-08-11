@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: e57d95d94482b19419bc15703a096b7f
   m_Entries:
   - m_Id: 36488851456
-    m_Key: ExampleSubtitle
+    m_Key: StartingSentence
     m_Metadata:
       m_Items: []
   m_Metadata:

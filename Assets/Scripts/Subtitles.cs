@@ -11,6 +11,8 @@ public class Subtitles : MonoBehaviour, ISingleton
     private AudioSource _source;
     private TMP_Text _text;
     private Coroutine _coroutine;
+    private bool _isPlaying;
+    public bool IsPlaying => _isPlaying;
 
     private void Awake()
     {
@@ -36,7 +38,7 @@ public class Subtitles : MonoBehaviour, ISingleton
 
     private IEnumerator Play(string text)
     {
-        
+        _isPlaying = true;
         _text.text = "";
         foreach (char c in text)
         {
@@ -47,5 +49,6 @@ public class Subtitles : MonoBehaviour, ISingleton
             }
             _text.text += c;
         }
+        _isPlaying = false;
     }
 }
