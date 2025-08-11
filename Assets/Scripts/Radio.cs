@@ -42,6 +42,7 @@ public class Radio : MonoBehaviour
         _radio.loop = true;
         _noise.loop = true;
         _noise.volume = 0f;
+        _tuning.ValueChanged.AddListener(ChangeClip);
     }
 
     private void OnButtonClick()
@@ -52,7 +53,7 @@ public class Radio : MonoBehaviour
 
     private void Start()
     {
-
+        StartCoroutine(DynamicAnim());
         _tuning.Init();
         _volume.Init();
         _waveChanger.Init();
@@ -73,10 +74,6 @@ public class Radio : MonoBehaviour
         _currentTime = Time.time;
         if (_isEnabled) _radio.volume = _volume.CurrentValue;
         else _radio.volume = 0;
-
-        var tuning = _tuning.CurrentValue;
-
-        ChangeClip();
     }
 
     private IEnumerator Shake()
@@ -117,15 +114,19 @@ public class Radio : MonoBehaviour
         WaveChanged.Invoke(old, _wave);
     }
 
-    public IEnumerator DynamicUpdate()
+    public IEnumerator DynamicAnim()
     {
         while (true)
         {
-            if (!_isEnabled) yield return null;
+            if (!_isEnabled)
+            {
+                yield return null;
+                continue;
+            }
 
             _dynamicIndex = (_dynamicIndex + 1) % _dynamicSprites.Count;
             _dynamic.sprite = _dynamicSprites[_dynamicIndex];
-            yield return new WaitForSecondsRealtime(0.5f); 
+            yield return new WaitForSecondsRealtime(0.25f); 
         }
     }
 }

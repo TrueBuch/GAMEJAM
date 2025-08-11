@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -23,6 +24,8 @@ public class Tuning : MonoBehaviour, ISelectable
     private bool _isHovering;
 
     private Input _input;
+
+    public readonly UnityEvent ValueChanged = new(); 
 
     private void Awake()
     {
@@ -72,6 +75,7 @@ public class Tuning : MonoBehaviour, ISelectable
         newValue = Mathf.Clamp(newValue, _radio.Wave.Get<TagWave>().Min, _radio.Wave.Get<TagWave>().Max);
         if (newValue != _currentValue)
         {
+            ValueChanged.Invoke();
             _currentIndex = (_currentIndex + 1) % _sprites.Count;
             _image.sprite = _sprites[_currentIndex];
         }

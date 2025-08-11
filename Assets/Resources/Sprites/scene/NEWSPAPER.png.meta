@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 992d4eac621a55340b4b416093da51b3
+guid: 44cbe1088c6357f41867fe75648e7303
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6902688123309520170
-    second: LFMP LIGHT_0
+      213: 6601594520835285766
+    second: NEWSPAPER_0
+  - first:
+      213: -2072074395461715871
+    second: NEWSPAPER_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LAM_LIGHTING
+      name: NEWSPAPER_0
       rect:
         serializedVersion: 2
         x: 1
         y: 1
-        width: 164
-        height: 180
+        width: 83
+        height: 59
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a25fb21b6464bcf50800000000000000
-      internalID: 6902688123309520170
+      spriteID: 6036d8d6d339d9b50800000000000000
+      internalID: 6601594520835285766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NEWSPAPER_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 1
+        width: 83
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 168725ec0538e33e0800000000000000
+      internalID: -2072074395461715871
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 123fcf0a7143bff43953e1322747f731
+    spriteID: 0a4efb6faa90f384a85b6c9a7bb504bc
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LAM_LIGHTING: 6902688123309520170
+      NEWSPAPER_0: 6601594520835285766
+      NEWSPAPER_1: -2072074395461715871
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
