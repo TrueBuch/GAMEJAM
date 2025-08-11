@@ -13,10 +13,15 @@ public class Radio : MonoBehaviour
     [SerializeField] private Volume _volume;
     [SerializeField] private Tuning _tuning;
     [SerializeField] private Button _button;
+    [SerializeField] private Image _dynamic;
+
+    [SerializeField] private List<Sprite> _dynamicSprites;
+
     [SerializeField] private List<Sprite> _buttonSprites;
 
     [SerializeField] private AudioSource _noise;
 
+    private int _dynamicIndex = 0;
     private float _currentTime = 0f;
     private Entity _wave;
     public Entity Wave => _wave;
@@ -68,7 +73,7 @@ public class Radio : MonoBehaviour
         _currentTime = Time.time;
         if (_isEnabled) _radio.volume = _volume.CurrentValue;
         else _radio.volume = 0;
-        
+
         var tuning = _tuning.CurrentValue;
 
         ChangeClip();
@@ -111,12 +116,19 @@ public class Radio : MonoBehaviour
         _wave = wave;
         WaveChanged.Invoke(old, _wave);
     }
-}
 
-internal class _buttonSprites
-{
-}
+    public IEnumerator DynamicUpdate()
+    {
+        while (true)
+        {
+            if (!_isEnabled) yield return null;
 
+            _dynamicIndex = (_dynamicIndex + 1) % _dynamicSprites.Count;
+            _dynamic.sprite = _dynamicSprites[_dynamicIndex];
+            yield return new WaitForSecondsRealtime(0.5f); 
+        }
+    }
+}
 public class TagWave : Tag
 {
     public float Min = 3f;

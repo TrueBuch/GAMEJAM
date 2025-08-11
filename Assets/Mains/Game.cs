@@ -9,7 +9,7 @@ public class Game : MonoBehaviour, ISingleton
     public void Start()
     {
         var events = Main.EventSystem.FindAll<IOnGameStarted>();
-        foreach (var e in events) StartCoroutine(e.OnStarted());
+        //foreach (var e in events) StartCoroutine(e.OnStarted());
     }
 }
 

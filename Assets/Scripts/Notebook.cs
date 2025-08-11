@@ -31,7 +31,7 @@ public class Notebook : MonoBehaviour, ISelectable
         _isHovering = true;
 
         _input.ActivateInputField();
-        transform.DOLocalMove(_targetPosition, 1f).OnComplete(() =>
+        transform.DOLocalMove(_targetPosition, 0.25f).OnComplete(() =>
         {
             
         });
@@ -44,7 +44,7 @@ public class Notebook : MonoBehaviour, ISelectable
         _pencil2.gameObject.SetActive(false);
         _pencil.gameObject.SetActive(true);
         _input.DeactivateInputField();
-        transform.DOLocalMove(_startedPosition, 1f);
+        transform.DOLocalMove(_startedPosition, 0.25f);
     }
 
     private void Update()
