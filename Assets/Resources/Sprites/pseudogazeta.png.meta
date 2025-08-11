@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 758ba128f5daf4845941852a8a54ec9c
+guid: 809b70392ab10d645ac0fd9914737b84
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4155558017390938713
-    second: pseudogazetaslozh_0
+      213: 4298166796029108609
+    second: pseudogazeta_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pseudogazetaslozh_0
+      name: pseudogazeta_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 21
-        width: 84
-        height: 74
+        x: 15
+        y: 0
+        width: 305
+        height: 174
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95a0d1eeff18ba930800000000000000
-      internalID: 4155558017390938713
+      spriteID: 181a1b6ade726ab30800000000000000
+      internalID: 4298166796029108609
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 422235f12fbeccb4c9eaaf48e644ad92
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pseudogazetaslozh_0: 4155558017390938713
+      pseudogazeta_0: 4298166796029108609
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
