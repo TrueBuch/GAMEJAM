@@ -17,8 +17,8 @@ public class Main : MonoBehaviour
     private ECS ecs;
     public static ECS ECS => Instance.ecs;
     
-    private EventSystem eventSystem;
-    public static EventSystem EventSystem => Instance.eventSystem;
+    private GameEventSystem eventSystem;
+    public static GameEventSystem EventSystem => Instance.eventSystem;
 
     public readonly Dictionary<Type, ISingleton> All = new();
 

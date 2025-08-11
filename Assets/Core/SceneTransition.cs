@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class SceneTransition : MonoBehaviour
 
     private GameObject[,] _pixels;
     public readonly UnityEvent<bool> TransitionCompleted = new();
-
     private void Awake()
     {
         // if (Main.SceneTransition != null && Main.SceneTransition != this)

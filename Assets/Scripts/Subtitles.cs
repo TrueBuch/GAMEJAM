@@ -44,7 +44,7 @@ public class Subtitles : MonoBehaviour, ISingleton
         {
             if (!char.IsWhiteSpace(c))
             {
-                _source.PlayOneShot(_clip);
+                //_source.PlayOneShot(_clip);
                 yield return new WaitForSecondsRealtime(_clip.length);
             }
             _text.text += c;
