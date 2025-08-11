@@ -1,32 +1,22 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Gazeta : MonoBehaviour, ISelectable
+public class Gazeta : MonoBehaviour
 {
-    private Button _gazeta;
-    [SerializeField] private Canvas _gazetaFull;
-    private Vector3 _startedPosition;
-
+    [SerializeField] private Button _button;
+    public Button Button => _button;
+    [SerializeField] private GazetaFull _gazetaFull;
+    
     private void Awake()
     {
-        _gazeta.onClick.AddListener(OnClicked);
-        _startedPosition = _gazeta.transform.localPosition;
+        _button.onClick.AddListener(OnClicked);
     }
 
     private void OnClicked()
     {
-        _gazeta.transform.DOLocalMove(Vector3.zero, 1f);
+        _button.gameObject.SetActive(false);
+        _gazetaFull.gameObject.SetActive(true);
+        _gazetaFull.OnClicked();
     }
-
-    public void OnPointerDown(PointerEventData eventData) { }
-
-    public void OnPointerEnter(PointerEventData eventData) {}
-
-    public void OnPointerExit(PointerEventData eventData) {}
-
-    public void OnPointerUp(PointerEventData eventData) {}
-
-
 }

@@ -55,6 +55,7 @@
     <Compile Include="Assets\Core\VFX.cs" />
     <Compile Include="Assets\Core\Main.cs" />
     <Compile Include="Assets\Scripts\Noise.cs" />
+    <Compile Include="Assets\Scripts\notebook.cs" />
     <Compile Include="Assets\Scripts\Radio.cs" />
     <Compile Include="Assets\Scripts\Tuning.cs" />
     <Compile Include="Assets\Core\Input\PlayerInput.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Assets\Core\Util\Reflection.cs" />
     <Compile Include="Assets\Scripts\Locale.cs" />
     <Compile Include="Assets\Core\Util\Text.cs" />
+    <Compile Include="Assets\Scripts\GazetaFull.cs" />
     <Compile Include="Assets\Mains\Game.cs" />
     <Compile Include="Assets\Scripts\Gazeta.cs" />
     <Compile Include="Assets\Scripts\WaveChanger.cs" />
