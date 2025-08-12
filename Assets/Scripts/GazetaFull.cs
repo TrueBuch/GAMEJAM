@@ -2,12 +2,13 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GazetaFull : MonoBehaviour, ISelectable
+public class GazetaFull : MonoBehaviour
 {
     [SerializeField] private Gazeta _gazeta;
     [SerializeField] private Canvas _canvas;
     private Vector3 _startedPosition;
     public Vector3 StartedPosition => _startedPosition;
+    private bool _isOpened;
 
     private void Awake()
     {
@@ -15,23 +16,23 @@ public class GazetaFull : MonoBehaviour, ISelectable
         _startedPosition = _canvas.transform.localPosition;
     }
 
+    private void Start()
+    {
+        Main.Get<Input>().RightClickStarted.AddListener(OnRightClickStarted);  
+    }
     public void OnClicked()
     {
-        _canvas.transform.DOLocalMove(Vector3.zero, 0.25f);
+        _isOpened = true;
+        _canvas.transform.DOLocalMove(Vector3.zero, 0.5f);
     }
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnRightClickStarted()
     {
-        if (eventData.button != PointerEventData.InputButton.Right) return;
+        if (!_isOpened) return;
         _canvas.transform.DOLocalMove(_startedPosition, 0.5f).OnComplete(() =>
         {
-            gameObject.SetActive(false);  
+            gameObject.SetActive(false);
             _gazeta.Button.gameObject.SetActive(true);
+            _isOpened = false;
         });
     }
-
-    public void OnPointerEnter(PointerEventData eventData) { }
-
-    public void OnPointerExit(PointerEventData eventData) { }
-
-    public void OnPointerUp(PointerEventData eventData) { }
 }

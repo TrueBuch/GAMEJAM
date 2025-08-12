@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 809b70392ab10d645ac0fd9914737b84
+guid: 0b508c959db59f74b9f671cba79ed267
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4298166796029108609
-    second: pseudogazeta_0
+      213: 2932971626054911752
+    second: CHAIR_0
+  - first:
+      213: -7292513773565075923
+    second: CHAIR_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,67 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pseudogazeta_0
+      name: CHAIR_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 360
-        width: 320
-        height: 180
+        y: 0
+        width: 45
+        height: 71
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 181a1b6ade726ab30800000000000000
-      internalID: 4298166796029108609
+      spriteID: 8078d43872204b820800000000000000
+      internalID: 2932971626054911752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pseudogazeta_1
+      name: CHAIR_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 180
-        width: 319
-        height: 180
+        x: 207
+        y: 2
+        width: 45
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2f20c5b0e6e2d7c4799640b1eb9a19ff
-      internalID: -1006131367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pseudogazeta_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 320
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b423349eafc8f3429474549701e7fe1
-      internalID: 850355942
+      spriteID: d2e920f3c59cbca90800000000000000
+      internalID: -7292513773565075923
       vertices: []
       indices: 
       edges: []
@@ -169,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bf7df40f7010df44ea9fa62569e9c625
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -179,9 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pseudogazeta_0: 4298166796029108609
-      pseudogazeta_1: -1006131367
-      pseudogazeta_2: 850355942
+      CHAIR_0: 2932971626054911752
+      CHAIR_1: -7292513773565075923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

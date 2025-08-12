@@ -16,7 +16,207 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: e57d95d94482b19419bc15703a096b7f
   m_Entries:
   - m_Id: 36488851456
-    m_Key: StartingSentence
+    m_Key: start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 616862457507840
+    m_Key: start_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 612763871719424
+    m_Key: not_find
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615659048775680
+    m_Key: interrupted_signal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615820659503104
+    m_Key: listening_sw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 616229641891840
+    m_Key: listening_sw_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 616548627099648
+    m_Key: listening_sw_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 616615975038976
+    m_Key: sound_interrupted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 617372342267904
+    m_Key: sound_interrupted_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 617517368717312
+    m_Key: looked_at_notebook
+    m_Metadata:
+      m_Items: []
+  - m_Id: 617558519033856
+    m_Key: looked_at_notebook_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 617631642529792
+    m_Key: looked_at_gazeta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 617708410875904
+    m_Key: knock_on_the_window
+    m_Metadata:
+      m_Items: []
+  - m_Id: 618267176054784
+    m_Key: knock_on_the_window_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 617910685380608
+    m_Key: looked_at_window
+    m_Metadata:
+      m_Items: []
+  - m_Id: 618426911928320
+    m_Key: looked_at_nnm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 618809184989184
+    m_Key: found_code_in_nnm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 619145756913664
+    m_Key: last_din
+    m_Metadata:
+      m_Items: []
+  - m_Id: 619239856123904
+    m_Key: last_din_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 619286832328704
+    m_Key: enter_code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 620512399568896
+    m_Key: enter_code_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 620592661770240
+    m_Key: enter_code_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 620773876674560
+    m_Key: rotated
+    m_Metadata:
+      m_Items: []
+  - m_Id: 620829711249408
+    m_Key: ending_1_clicked_on_chair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 621900919713792
+    m_Key: ending_1_clicked_on_chair_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 621922939809792
+    m_Key: ending_1_clicked_on_chair_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622050601840640
+    m_Key: ending_1_1C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622441427087360
+    m_Key: ending_1_2C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622541784199168
+    m_Key: ending_1_1C_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622639008165888
+    m_Key: ending_1_2C_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622913269510144
+    m_Key: ending_1_2C_1_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 622984044195840
+    m_Key: "ending_1_1\u0421_2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623107239292928
+    m_Key: "ending_1_1\u0421_2_1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623256963362816
+    m_Key: ending_1_2C_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623369177772032
+    m_Key: ending_1_2C_2_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623455521714176
+    m_Key: "ending_1_1\u0421_3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623459086872576
+    m_Key: "ending_1_1\u0421_3_1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623612304797696
+    m_Key: ending_2_found
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623659645906944
+    m_Key: ending_2_found_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623667711553536
+    m_Key: ending_2_flash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 623837702500352
+    m_Key: ending_2_1C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624036671893504
+    m_Key: ending_2_2C
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624154296954880
+    m_Key: ending_2_1C_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624206411182080
+    m_Key: ending_2_2C_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624263529213952
+    m_Key: ending_2_1C_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624443620044800
+    m_Key: ending_2_2C_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624497546211328
+    m_Key: ending_2_2C_2_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624540948869120
+    m_Key: ending_2_1C_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624638911033344
+    m_Key: ending_2_2C_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624685547499520
+    m_Key: ending_2_1C_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 624755743371264
+    m_Key: New Entry
     m_Metadata:
       m_Items: []
   m_Metadata:

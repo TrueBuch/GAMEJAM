@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 809b70392ab10d645ac0fd9914737b84
+guid: b7118e7aeaa5bde408c7044ab8a382ca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4298166796029108609
-    second: pseudogazeta_0
+      213: -48778457285678545
+    second: SOFABLYAT_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,67 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pseudogazeta_0
+      name: SOFABLYAT_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 360
-        width: 320
-        height: 180
+        y: 0
+        width: 201
+        height: 104
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 181a1b6ade726ab30800000000000000
-      internalID: 4298166796029108609
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pseudogazeta_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 180
-        width: 319
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f20c5b0e6e2d7c4799640b1eb9a19ff
-      internalID: -1006131367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pseudogazeta_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 320
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b423349eafc8f3429474549701e7fe1
-      internalID: 850355942
+      spriteID: f2aabc46044b25ff0800000000000000
+      internalID: -48778457285678545
       vertices: []
       indices: 
       edges: []
@@ -169,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bf7df40f7010df44ea9fa62569e9c625
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -179,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pseudogazeta_0: 4298166796029108609
-      pseudogazeta_1: -1006131367
-      pseudogazeta_2: 850355942
+      SOFABLYAT_0: -48778457285678545
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

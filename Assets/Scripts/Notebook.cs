@@ -23,6 +23,8 @@ public class Notebook : MonoBehaviour, ISelectable
         _targetPosition = _startedPosition;
         _targetPosition.y += _offset;
         _startedPencil2Positon = _pencil2.transform.localPosition;
+        _input.text = "123";
+        _input.caretPosition = _input.text.Length;
     }
     public void OnPointerDown(PointerEventData eventData) { }
 
@@ -52,14 +54,15 @@ public class Notebook : MonoBehaviour, ISelectable
         if (!_isHovering) return;
 
         int caretPos = _input.caretPosition;
+    
         TMP_Text text = _input.textComponent;
-
-        if (text.text.Length > 1)
+        Debug.Log(caretPos);
+        if (text.text.Length > 1 && caretPos > 0)
         {
             _pencil.gameObject.SetActive(false);
             _pencil2.gameObject.SetActive(true);
 
-            var charInfo = text.textInfo.characterInfo[caretPos];
+            var charInfo = text.textInfo.characterInfo[caretPos - 1];
             var charPos = charInfo.bottomRight;
             charPos.x += 2.5f;
             _pencil2.transform.localPosition = charPos;

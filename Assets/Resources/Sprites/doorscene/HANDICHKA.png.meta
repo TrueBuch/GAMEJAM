@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 65b5021b33697704b8d549c980644957
+guid: 8ea560071f9e6cc4e968edc63faf6526
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7746577658970274473
-    second: LAMP ON_0
+      213: 1092667589414240113
+    second: HANDICHKA_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LAMP ON_0
+      name: HANDICHKA_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 46
-        height: 53
+        x: 0
+        y: 0
+        width: 9
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9aa76e3765f518b60800000000000000
-      internalID: 7746577658970274473
+      spriteID: 17f3e94226fe92f00800000000000000
+      internalID: 1092667589414240113
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 92c0e9574e5419845a7ac8e1fc412ab2
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LAMP ON_0: 7746577658970274473
+      HANDICHKA_0: 1092667589414240113
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

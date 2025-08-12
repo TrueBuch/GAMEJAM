@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class ECS
 {
@@ -52,10 +53,16 @@ public class ECS
     {
         return entityTable.GetAll().OfType<T>().ToList();
     }
-    
+
     public List<Entity> GetAllWith<T>() where T : Tag
     {
         return entityTable.GetAll().Where(entity => entity.Has<T>()).ToList();
+    }
+
+    public void Reset()
+    {
+        entityTable.Clear();
+        AddAll();
     }
 }
 
@@ -94,6 +101,11 @@ public class EntityTable<T> where T : Entity
     public List<T> GetAll()
     {
         return _entities.Values.ToList();
+    }
+
+    public void Clear()
+    {
+        _entities.Clear();
     }
 }
 

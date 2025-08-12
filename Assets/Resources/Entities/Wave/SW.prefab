@@ -55,9 +55,13 @@ MonoBehaviour:
       data:
         Min: 3
         Max: 30
+        enabled: 0000
+        key:
+        - cosmos
+        - nnm
         Clips:
-        - {fileID: 8300000, guid: e3ca565628c37e84ca14bac33e88217b, type: 3}
-        - {fileID: 8300000, guid: 6979d369cef4c414589be91fcaf82fa7, type: 3}
+        - {fileID: 0}
+        - {fileID: 0}
         Ranges:
-        - {x: 12, y: 30}
-        - {x: 3, y: 11}
+        - {x: 18, y: 20}
+        - {x: 13, y: 13}

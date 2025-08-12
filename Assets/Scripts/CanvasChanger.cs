@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanvasChanger : MonoBehaviour
+public class CanvasChanger : MonoBehaviour, ISingleton
 {
     [SerializeField] private List<Canvas> _walls;
     [SerializeField] private int _currentIndex;
     [SerializeField] private float _duration = 1f;
     [SerializeField] private Button _leftButton;
     [SerializeField] private Button _rightButton;
+
+    public Button Left => _leftButton;
+    public Button Right => _rightButton;
 
     private bool _isPlaying;
 
@@ -62,7 +65,6 @@ public class CanvasChanger : MonoBehaviour
 
         while (time < _duration)
         {
-            Debug.Log("123");
             time += Time.deltaTime;
             var t = Mathf.Clamp01(time / _duration);
             nextCanvas.transform.localPosition = Vector2.Lerp(newPos, startPos, t);
@@ -73,4 +75,6 @@ public class CanvasChanger : MonoBehaviour
         _currentIndex = next;
         _isPlaying = false;
     }
+
+    public void Initialize() {}
 }
