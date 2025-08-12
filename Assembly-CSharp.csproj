@@ -50,11 +50,14 @@
   <ItemGroup>
     <Compile Include="Assets\Core\Components\Draggable.cs" />
     <Compile Include="Assets\Core\Input\Input.cs" />
+    <Compile Include="Assets\Scripts\Book.cs" />
     <Compile Include="Assets\Core\EntitySystem\ECS.cs" />
     <Compile Include="Assets\Core\Components\Selectable.cs" />
     <Compile Include="Assets\Core\VFX.cs" />
     <Compile Include="Assets\Core\Main.cs" />
+    <Compile Include="Assets\Scripts\BookFull.cs" />
     <Compile Include="Assets\Scripts\Noise.cs" />
+    <Compile Include="Assets\Scripts\Lamp.cs" />
     <Compile Include="Assets\Scripts\Radio.cs" />
     <Compile Include="Assets\Scripts\Tuning.cs" />
     <Compile Include="Assets\Core\Input\PlayerInput.cs" />

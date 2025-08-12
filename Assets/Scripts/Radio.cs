@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -92,7 +91,7 @@ public class Radio : MonoBehaviour
         var tagWave = Wave.Get<TagWave>();
         int index = tagWave.Ranges
         .Select((v, i) => new { Value = v, Index = i })
-        .FirstOrDefault(x => x.Value.x <= _tuning.CurrentValue && _tuning.CurrentValue <= x.Value.y)
+        .FirstOrDefault(x => tagWave.Enabled[x.Index] && x.Value.x <= _tuning.CurrentValue && _tuning.CurrentValue <= x.Value.y)
         ?.Index ?? -1;
 
         var oldClip = _radio.clip;
@@ -112,6 +111,7 @@ public class Radio : MonoBehaviour
         var old = _wave;
         _wave = wave;
         WaveChanged.Invoke(old, _wave);
+        ChangeClip();
     }
 
     public IEnumerator DynamicAnim()
@@ -135,17 +135,9 @@ public class TagWave : Tag
     public float Min = 3f;
     public float Max = 30f;
 
+    [HorizontalGroup(Width = 100)] public List<bool> Enabled = new();
+    [HorizontalGroup] public List<string> Keys = new();
     [HorizontalGroup] public List<AudioClip> Clips = new();
     [MinMaxSlider(nameof(Min), nameof(Max), ShowFields = true)]
     [HorizontalGroup] public List<Vector2Int> Ranges = new();
-}
-public class Waves
-{
-
-    // SW : 3MHz - 30MHz 
-    // AM : 540KHz - 1600KHz 
-    // FM : 88MHz - 108 MHz
-
-    //ДИАПАЗОНЫ - АУДИОФАЙЛЫ
-    //ПОМЕХИ
 }

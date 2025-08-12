@@ -55,9 +55,16 @@ MonoBehaviour:
       data:
         Min: 88
         Max: 108
+        Enabled: 000101
+        Keys:
+        - R3
+        - R2
+        - R1
         Clips:
+        - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
         - {fileID: 8300000, guid: 0242d28a0f55c4047b9f92da563058db, type: 3}
-        - {fileID: 8300000, guid: 8715ef8a8c390ba4f83961a56e9b3d20, type: 3}
+        - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
         Ranges:
-        - {x: 88, y: 96}
-        - {x: 97, y: 108}
+        - {x: 102, y: 106}
+        - {x: 96, y: 100}
+        - {x: 90, y: 94}

@@ -55,9 +55,12 @@ MonoBehaviour:
       data:
         Min: 540
         Max: 1600
+        key:
+        - morze
+        - window
         Clips:
-        - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
-        - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
+        - {fileID: 0}
+        - {fileID: 0}
         Ranges:
-        - {x: 540, y: 1050}
-        - {x: 1051, y: 1600}
+        - {x: 990, y: 1095}
+        - {x: 666, y: 666}

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 65b5021b33697704b8d549c980644957
+guid: 0c0973d9581ca6c41b75a636fb27f752
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7746577658970274473
-    second: LAMP ON_0
+      213: -4080803217227080751
+    second: LAMP ON-sheet_0
+  - first:
+      213: 6920716157232990777
+    second: LAMP ON-sheet_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LAMP ON_0
+      name: LAMP ON-sheet_0
       rect:
         serializedVersion: 2
         x: 1
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9aa76e3765f518b60800000000000000
-      internalID: 7746577658970274473
+      spriteID: 1db98ee48131e57c0800000000000000
+      internalID: -4080803217227080751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAMP ON-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1
+        width: 46
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93acd2f6da25b0060800000000000000
+      internalID: 6920716157232990777
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 92c0e9574e5419845a7ac8e1fc412ab2
+    spriteID: 66fef0e619b3aa04f9355176af638cf7
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LAMP ON_0: 7746577658970274473
+      LAMP ON-sheet_0: -4080803217227080751
+      LAMP ON-sheet_1: 6920716157232990777
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

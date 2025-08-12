@@ -55,6 +55,7 @@ public class Main : MonoBehaviour
     {
         Instance.All.Clear();
 
+        Instance.ecs.Reset();
         Instance.RegisterAll();
         Instance.InitializeAll();
     }
