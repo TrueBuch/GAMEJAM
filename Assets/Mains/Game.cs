@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,11 @@ public class Game : MonoBehaviour, ISingleton
     public void Initialize() { }
 
     public void Start()
+    {
+        Main.SceneTransition.TransitionCompleted.AddListener(OnSceneStarted);
+    }
+
+    private void OnSceneStarted(bool arg0)
     {
         var events = Main.EventSystem.FindAll<IOnGameStarted>();
         foreach (var e in events) StartCoroutine(e.OnStarted());

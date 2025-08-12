@@ -11,8 +11,8 @@ public class Main : MonoBehaviour
     private GameConfig _gameConfig;
     public static GameConfig GameConfig => Instance._gameConfig;
 
-    //private SceneTransition _sceneTransition;
-    //public static SceneTransition SceneTransition => Instance._sceneTransition;
+    private SceneTransition _sceneTransition;
+    public static SceneTransition SceneTransition => Instance._sceneTransition;
 
     private ECS ecs;
     public static ECS ECS => Instance.ecs;
@@ -44,7 +44,7 @@ public class Main : MonoBehaviour
         var gameObject = new GameObject("Main");
         Instance = gameObject.AddComponent<Main>();
         Instance._gameConfig = Resources.Load<GameConfig>("GameConfig");
-        //Instance._sceneTransition = Instantiate(Content.SceneTransition).GetComponent<SceneTransition>();
+        Instance._sceneTransition = Instantiate(Content.SceneTransition).GetComponent<SceneTransition>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 

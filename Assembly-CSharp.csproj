@@ -53,10 +53,11 @@
     <Compile Include="Assets\Scripts\Book.cs" />
     <Compile Include="Assets\Core\EntitySystem\ECS.cs" />
     <Compile Include="Assets\Core\Components\Selectable.cs" />
-    <Compile Include="Assets\Core\VFX.cs" />
+    <Compile Include="Assets\Scripts\Clock.cs" />
     <Compile Include="Assets\Core\Main.cs" />
     <Compile Include="Assets\Scripts\BookFull.cs" />
     <Compile Include="Assets\Scripts\Noise.cs" />
+    <Compile Include="Assets\Mains\Menu.cs" />
     <Compile Include="Assets\Scripts\Lamp.cs" />
     <Compile Include="Assets\Scripts\Radio.cs" />
     <Compile Include="Assets\Scripts\Tuning.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Assets\Core\EntitySystem\EntityPrefab.cs" />
     <Compile Include="Assets\Core\SceneTransition.cs" />
     <Compile Include="Assets\Core\Util\Reflection.cs" />
+    <Compile Include="Assets\Mains\Bootstrap.cs" />
     <Compile Include="Assets\Scripts\Locale.cs" />
     <Compile Include="Assets\Core\Util\Text.cs" />
     <Compile Include="Assets\Scripts\GazetaFull.cs" />

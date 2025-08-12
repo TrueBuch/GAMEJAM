@@ -86,7 +86,7 @@ public class EntityTable<T> where T : Entity
         if (!_entities.ContainsKey(entity.ID))
         {
             _entities.Add(entity.ID, entity);
-            Debug.Log($"Added {entity.ID}");
+            //Debug.Log($"Added {entity.ID}");
             return;
         }
 

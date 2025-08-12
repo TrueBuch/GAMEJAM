@@ -62,7 +62,7 @@ public class Radio : MonoBehaviour
         _radio.volume = 0;
         _radio.Play();
 
-        _noise.clip = Content.AudioNoise;
+        //_noise.clip = Content.AudioNoise;
         _noise.Play();
 
         //StartCoroutine(Shake());
