@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RadioState
@@ -17,6 +18,9 @@ public class RadioState
         Waves.Add("FM", new Wave("FM"));
         Waves.Add("SW", new Wave("SW"));
         Waves.Add("AM", new Wave("AM"));
+        Waves.Add("MENUFM", new Wave("MENUFM"));
+        Waves.Add("MENUAM", new Wave("MENUAM"));
+        Waves.Add("MENUSW", new Wave("MENUSW"));
     }
 }
 
@@ -58,7 +62,7 @@ public class Radio : MonoBehaviour, ISingleton
     private RadioState _state;
     public RadioState State => _state;
 
-    private bool _isEnabled = false;
+    [SerializeField] private bool _isEnabled = false;
     public bool IsEnabled => _isEnabled;
 
     public AudioSource Noise => Noise;
@@ -70,6 +74,7 @@ public class Radio : MonoBehaviour, ISingleton
     private void Awake()
     {
         _button.onClick.AddListener(OnButtonClick);
+        _button.image.sprite = _isEnabled ? _buttonSprites[1] : _buttonSprites[0];
         _radio = GetComponent<AudioSource>();
         _radio.loop = true;
         _noise.loop = true;
@@ -89,9 +94,8 @@ public class Radio : MonoBehaviour, ISingleton
         StartCoroutine(DynamicAnim());
         _tuning.Init();
         _volume.Init();
-        _waveChanger.Init();
 
-        ChangeWave(_state.Waves["FM"]);
+        ChangeWave(SceneManager.GetActiveScene().name == "Main" ? _state.Waves["FM"] : _state.Waves["MENUFM"]);
         ChangeClip();
         _radio.volume = 0;
         _radio.Play();
@@ -120,7 +124,7 @@ public class Radio : MonoBehaviour, ISingleton
         }
     }
 
-    private void ChangeClip()
+    public void ChangeClip()
     {
         var wave = _state.CurrentWave;
         var tagWave = wave.entity.Get<TagWave>();
@@ -143,8 +147,11 @@ public class Radio : MonoBehaviour, ISingleton
 
             _radio.Play();
 
-            var events = Main.EventSystem.FindAll<IOnClipChanged>();
-            foreach (var e in events) StartCoroutine(e.OnChanged(oldClip, newClip));
+            if (SceneManager.GetActiveScene().name == "Main")
+            {
+                var events = Main.EventSystem.FindAll<IOnClipChanged>();
+                foreach (var e in events) StartCoroutine(e.OnChanged(oldClip, newClip));
+            }
         }
     }
 
@@ -153,8 +160,12 @@ public class Radio : MonoBehaviour, ISingleton
         var old = _state.CurrentWave;
         _state.CurrentWave = wave;
         WaveChanged.Invoke(old, _state.CurrentWave);
-        var events = Main.EventSystem.FindAll<IOnWaveChanged>();
-        foreach (var e in events) StartCoroutine(e.OnChanged(old, _state.CurrentWave));
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            var events = Main.EventSystem.FindAll<IOnWaveChanged>();
+            foreach (var e in events) StartCoroutine(e.OnChanged(old, _state.CurrentWave));
+        }
+
         ChangeClip();
     }
 
@@ -172,6 +183,29 @@ public class Radio : MonoBehaviour, ISingleton
             _dynamic.sprite = _dynamicSprites[_dynamicIndex];
             yield return new WaitForSecondsRealtime(0.25f);
         }
+    }
+
+    public Wave Wave(string wave)
+    {
+        return State.Waves[wave];
+    }
+
+    public bool IsCurrent(string name)
+    {
+        
+        var wave = State.CurrentWave.entity.Get<TagWave>();
+        var index = wave.Clips.IndexOf(_radio.clip);
+        if (index < 0 || index >= wave.Keys.Count) return false;
+
+        if (name == wave.Keys[index]) Debug.Log($"{name}");
+        return name == wave.Keys[index];
+    }
+
+    public void SetEnable(string waveName, string name, bool bol)
+    {
+        var wave = Wave(waveName);
+        wave.Enabled[wave.entity.Get<TagWave>().Keys.IndexOf(name)] = bol;
+        ChangeClip();
     }
 
     public void Initialize() { }

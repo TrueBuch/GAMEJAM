@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WaveChanger : MonoBehaviour
 {
     [SerializeField] private Radio _radio;
-    private List<string> _waves = new();
+    [SerializeField] private List<string> _waves = new();
 
     [SerializeField] private List<Sprite> _sprites;
     private Image _image;
@@ -20,15 +20,6 @@ public class WaveChanger : MonoBehaviour
         _image = GetComponent<Image>();
         _button = GetComponent<Button>();
         _button.onClick.AddListener(OnClick);
-    }
-
-    public void Init()
-    {
-        _waves.Clear();
-
-        _waves.Add("FM");
-        _waves.Add("AM");
-        _waves.Add("SW");
     }
 
     private void OnClick()

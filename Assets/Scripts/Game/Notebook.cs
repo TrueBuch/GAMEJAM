@@ -1,11 +1,13 @@
+using System.Collections;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Notebook : MonoBehaviour, ISelectable
+public class Notebook : MonoBehaviour, ISingleton, ISelectable
 {
+    public bool notebook = false;
     [SerializeField] private Image _pencil2;
     [SerializeField] private Image _pencil;
     [SerializeField] private TMP_InputField _input;
@@ -31,17 +33,19 @@ public class Notebook : MonoBehaviour, ISelectable
     {
         _isHovering = true;
 
+        var events = Main.EventSystem.FindAll<IOnNotebookUp>();
+        foreach (var e in events) StartCoroutine(e.OnUp());
         _input.ActivateInputField();
-        transform.DOLocalMove(_targetPosition, 0.25f).OnComplete(() =>
-        {
-            
-        });
+        transform.DOLocalMove(_targetPosition, 0.25f).OnComplete(() => { });
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _isHovering = false;
 
+        var events = Main.EventSystem.FindAll<IOnNotebookDown>();
+        foreach (var e in events) StartCoroutine(e.OnDown());
+        
         _pencil2.gameObject.SetActive(false);
         _pencil.gameObject.SetActive(true);
         _input.DeactivateInputField();
@@ -53,7 +57,7 @@ public class Notebook : MonoBehaviour, ISelectable
         if (!_isHovering) return;
 
         int caretPos = _input.caretPosition;
-    
+
         TMP_Text text = _input.textComponent;
         if (text.text.Length > 1 && caretPos > 0)
         {
@@ -72,5 +76,22 @@ public class Notebook : MonoBehaviour, ISelectable
         }
     }
 
+    public void AddText(string text)
+    {
+        _input.text += text;
+    }
+
     public void OnPointerUp(PointerEventData eventData) { }
+
+    public void Initialize() { }
+}
+
+public interface IOnNotebookUp
+{
+    public IEnumerator OnUp();
+}
+
+public interface IOnNotebookDown
+{
+    public IEnumerator OnDown();
 }
