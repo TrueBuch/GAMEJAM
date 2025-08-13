@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1831559842077164123}
   - component: {fileID: 159632188765127277}
   m_Layer: 0
-  m_Name: SW
+  m_Name: MENUFM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01376d47966ae814a9fa7dc27510a34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _builtId: Wave/SW
+  _builtId: Wave/MENUFM
   _components:
   - rid: 2684597491175260241
   references:
@@ -53,18 +53,12 @@ MonoBehaviour:
     - rid: 2684597491175260241
       type: {class: TagWave, ns: , asm: Assembly-CSharp}
       data:
-        Min: 3
-        Max: 30
-        Enabled: 000000
+        Min: 88
+        Max: 108
+        Enabled: 01
         Keys:
-        - bipbip
         - 
-        - bipbip_code
         Clips:
         - {fileID: 8300000, guid: 8715ef8a8c390ba4f83961a56e9b3d20, type: 3}
-        - {fileID: 0}
-        - {fileID: 8300000, guid: 0242d28a0f55c4047b9f92da563058db, type: 3}
         Ranges:
-        - {x: 18, y: 20}
-        - {x: 13, y: 13}
-        - {x: 18, y: 20}
+        - {x: 88, y: 108}

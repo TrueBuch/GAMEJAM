@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -43,15 +44,14 @@ public class Enable102Wave : Event, IOnPageChanged, IOnGameStarted
         if (_invoked) yield break;
         if (index != 1) yield break;
         _invoked = true;
-        var wave = Main.Get<Radio>().State.Waves["FM"];
-        var waveIndex = wave.entity.Get<TagWave>().Keys.IndexOf("R3");
-        wave.Enabled[waveIndex] = true;
+        var radio = Main.Get<Radio>();
+        radio.SetEnable("FM", "start", true);
         Debug.Log("102 enabled");
     }
 
 }
 
-public class Enable990Wave : Event, IOnClipChanged, IOnGameStarted
+public class Listen102Wave : Event, IOnClipChanged, IOnGameStarted
 {
     private bool _invoked = false;
     public IEnumerator OnStarted()
@@ -59,16 +59,13 @@ public class Enable990Wave : Event, IOnClipChanged, IOnGameStarted
         _invoked = false;
         yield break;
     }
+
     public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
     {
         if (_invoked) yield break;
         if (newClip == null) yield break;
-        
-        
-        var wave = Main.Get<Radio>().State.CurrentWave;
-        var index = wave.entity.Get<TagWave>().Clips.IndexOf(newClip);
+        if (!Main.Get<Radio>().IsCurrent("start")) yield break;
 
-        if (wave.entity.Get<TagWave>().Keys[index] != "R3") yield break;
         _invoked = true;
         var subs = Main.Get<Subtitles>();
         yield return new WaitForSecondsRealtime(3f);
@@ -77,14 +74,33 @@ public class Enable990Wave : Event, IOnClipChanged, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(true, "not_find_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
+        Main.Get<Gazeta>().GazetaFull.Change(1);
+    }
+}
 
-        var amWave = Main.ECS.Get("Wave/AM").Get<TagWave>();
-        amWave.Enabled[amWave.Keys.IndexOf("cosmos")] = true;
+public class Enable990Wave : Event, IOnGazetaOpened, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnOpened(int index)
+    {
+        if (index != 1) yield break;
+        if (_invoked) yield break;
+
+        _invoked = true;
+        var radio = Main.Get<Radio>();
+        radio.SetEnable("AM", "cosmos", true);
+        
         Debug.Log("990 enabled");
     }
 }
 
-public class Play990Subtitles : Event, IOnGameStarted
+public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
 {
     private bool _invoked = false;
     public IEnumerator OnStarted()
@@ -96,15 +112,80 @@ public class Play990Subtitles : Event, IOnGameStarted
     {
         if (_invoked) yield break;
         if (newClip == null) yield break;
-        var subs = Main.Get<Subtitles>();
-        var wave = Main.Get<Radio>().State.CurrentWave.entity.Get<TagWave>();
-        var index = wave.Clips.IndexOf(newClip);
+        if (!Main.Get<Radio>().IsCurrent("cosmos")) yield break;
 
-        if (wave.Keys[index] != "cosmos") yield break;
+        _invoked = true;
+
+        var radio = Main.Get<Radio>();
+        var subs = Main.Get<Subtitles>();
+        radio.SetEnable("SW", "bipbip", true);
 
         yield return new WaitForSecondsRealtime(5f);
         subs.TypeByKey(true, "cosmos");
-        
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        Main.Get<Clock>().ChangeDon();
+        Debug.Log("18 enabled");
+    }
+}
+
+public class Sw18Listen : Event, IOnClipChanged, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
+    {
+        if (_invoked) yield break;
+        if (newClip == null) yield break;
+        var radio = Main.Get<Radio>();
+        var subs = Main.Get<Subtitles>();
+
+        if (!Main.Get<Radio>().IsCurrent("bipbip")) yield break;
+        _invoked = true;
+        yield return new WaitForSecondsRealtime(5f);
+
+        var state = Main.Get<Radio>().State;
+        subs.TypeByKey(true, "listening_sw");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(true, "listening_sw_1");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(true, "listening_sw_2");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        yield return new WaitForSecondsRealtime(2f);
+        radio.SetEnable("SW", "bipbip", false);
+        radio.SetEnable("SW", "bipbip_code", true);
+        yield return new WaitForSecondsRealtime(2.5f);
+
+        Main.Get<Radio>().ChangeClip();
+        Main.Get<Notebook>().notebook = true;
+    }
+}
+
+public class OBERNIS : Event, IOnNotebookUp, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnUp()
+    {
+        if (_invoked) yield break;
+        if (!Main.Get<Notebook>().notebook) yield break;
+        _invoked = true;
+
+        var subs = Main.Get<Subtitles>();
+        Main.Get<Notebook>().AddText("ОБЕРНИСЬ");
+        subs.TypeByKey(true, "looked_at_notebook");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(true, "looked_at_notebook_1");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        Main.Get<Clock>().ChangeDon();
     }
 }
 
@@ -121,6 +202,8 @@ public class SecondDon : Event, IOnDonChanged
     public IEnumerator OnChanged(int value)
     {
         if (value != 2) yield break;
+        Main.Get<Gazeta>().GazetaFull.Change(2);
+        Main.Get<Painting>().ChangeState(1);
     }
 }
 

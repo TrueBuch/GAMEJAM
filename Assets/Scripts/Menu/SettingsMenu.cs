@@ -7,12 +7,14 @@ public class SettingsMenu : MonoBehaviour, IMenu
 {
     [SerializeField] private Toggle _fullscreen;
     [SerializeField] private Slider _volumeSlider;
+    [SerializeField] private Button _done;
 
     public void Initialize()
     {
         _volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
         _fullscreen.onValueChanged.AddListener(OnFullsceenChanged);
 
+        _done.onClick.AddListener(() => Main.Get<MenuController>().HideAll());
         _volumeSlider.value = PlayerPrefs.GetFloat("volume");
         _fullscreen.isOn = PlayerPrefs.GetInt("fullscreen") == 1;
     }

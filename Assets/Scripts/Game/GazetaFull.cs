@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class GazetaFull : MonoBehaviour
     public Vector3 StartedPosition => _startedPosition;
     private bool _isOpened;
 
+    private int _index;
     [SerializeField] private Image _image;
 
 
@@ -41,9 +43,17 @@ public class GazetaFull : MonoBehaviour
             _isOpened = false;
         });
     }
-    
-    public void ChangeSprite(int index)
+
+    public void Change(int index)
     {
+        _index = index;
         _image.sprite = _sprites[index];
+        var events = Main.EventSystem.FindAll<IOnGazetaOpened>();
+        foreach (var e in events) _gazeta.StartCoroutine(e.OnOpened(_index));
     }
+}
+
+public interface IOnGazetaOpened
+{
+    public IEnumerator OnOpened(int index);
 }

@@ -3,12 +3,13 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Gazeta : MonoBehaviour
+public class Gazeta : MonoBehaviour, ISingleton
 {
     [SerializeField] private Button _button;
     public Button Button => _button;
 
     [SerializeField] private GazetaFull _gazetaFull;
+    public GazetaFull GazetaFull => _gazetaFull;
 
     private void Awake()
     {
@@ -22,4 +23,5 @@ public class Gazeta : MonoBehaviour
         _gazetaFull.OnClicked();
     }
 
+    public void Initialize() {}
 }
