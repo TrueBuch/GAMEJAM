@@ -36,6 +36,7 @@ public class BookFull : MonoBehaviour
     private void Start()
     {
         Main.Get<Input>().RightClickStarted.AddListener(OnRightClickStarted);
+        UpdateView();
     }
     public void OnClicked()
     {

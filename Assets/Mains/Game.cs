@@ -40,6 +40,7 @@ public class Enable102Wave : Event, IOnPageChanged, IOnGameStarted
     public IEnumerator OnChanged(int index)
     {
         if (_invoked) yield break;
+        if (index != 1) yield break;
         _invoked = true;
         var wave = Main.Get<Radio>().State.Waves["FM"];
         var waveIndex = wave.entity.Get<TagWave>().Keys.IndexOf("R3");

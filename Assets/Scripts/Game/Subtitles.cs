@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -60,9 +61,12 @@ public class Subtitles : MonoBehaviour, ISingleton
         foreach (char c in text)
         {
 
-            //_source.PlayOneShot(_clip);
-            yield return new WaitForSecondsRealtime(printDelay);
-            
+            if (!char.IsWhiteSpace(c))
+            {
+                //_source.PlayOneShot(_clip);
+                yield return new WaitForSecondsRealtime(printDelay);
+            }
+                
             _text.text += c;
         }
         yield return new WaitForSecondsRealtime(1f);
