@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -61,11 +62,11 @@ public class BookFull : MonoBehaviour
         _left.gameObject.SetActive(page != 0);
 
         _right.gameObject.SetActive(_book.IsNormal ? page != _defaultPages.Count - 1 : page != _nnmPages.Count - 1);
+
+        var events = Main.EventSystem.FindAll<IOnPageChanged>();
+        foreach (var e in events) StartCoroutine(e.OnChanged(page));
     }
-    private void Update()
-    {
-        Debug.Log(_defaultPages.Count);
-    }
+
     public void OnRightClickStarted()
     {
         if (!_isOpened) return;
@@ -77,3 +78,5 @@ public class BookFull : MonoBehaviour
         });
     }
 }
+
+public interface IOnPageChanged { public IEnumerator OnChanged(int index); }

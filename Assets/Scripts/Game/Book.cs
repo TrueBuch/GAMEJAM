@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +6,7 @@ public class Book : MonoBehaviour
 {
     [SerializeField] private Sprite normalSprite;
     [SerializeField] private Sprite nnmSprite;
-    
+
     [SerializeField] private Button _button;
     public Button Button => _button;
     [SerializeField] private BookFull _bookFull;

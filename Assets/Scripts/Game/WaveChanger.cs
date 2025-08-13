@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WaveChanger : MonoBehaviour
 {
     [SerializeField] private Radio _radio;
-    private List<Entity> _waves = new();
+    private List<string> _waves = new();
 
     [SerializeField] private List<Sprite> _sprites;
     private Image _image;
@@ -26,17 +26,16 @@ public class WaveChanger : MonoBehaviour
     {
         _waves.Clear();
 
-        var ecs = Main.ECS;
-        _waves.Add(ecs.Get("Wave/FM"));
-        _waves.Add(ecs.Get("Wave/AM"));
-        _waves.Add(ecs.Get("Wave/SW"));
+        _waves.Add("FM");
+        _waves.Add("AM");
+        _waves.Add("SW");
     }
 
     private void OnClick()
     {
         _currentIndex = (_currentIndex + 1) % _waves.Count;
         _image.sprite = _sprites[_currentIndex];
-        _radio.ChangeWave(_waves[_currentIndex]);
+        _radio.ChangeWave(Main.Get<Radio>().State.Waves[_waves[_currentIndex]]);
 
         //Main.Get<Subtitles>().TypeByKey("ExampleSubtitle");
     }
