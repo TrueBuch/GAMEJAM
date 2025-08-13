@@ -35,7 +35,7 @@ public class Main : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initiallize()
     {
-        if (!PlayerPrefs.HasKey("volume")) PlayerPrefs.SetFloat("volume", 0.1f);
+        if (!PlayerPrefs.HasKey("volume")) PlayerPrefs.SetFloat("volume", 0.5f);
 
         Instance = null;
 

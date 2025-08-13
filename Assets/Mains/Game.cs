@@ -1,7 +1,5 @@
 using System.Collections;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Game : MonoBehaviour, ISingleton
 {
