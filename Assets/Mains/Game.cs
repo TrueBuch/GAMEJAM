@@ -26,6 +26,7 @@ public class StartingSentence : Event, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(true, "start_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
+        yield return new WaitForSecondsRealtime(10f);
     }
 }
 
