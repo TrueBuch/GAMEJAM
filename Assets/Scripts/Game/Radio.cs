@@ -4,9 +4,42 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Radio : MonoBehaviour
+public class RadioState
+{
+    public Wave CurrentWave;
+    public Dictionary<string, Wave> Waves = new();
+
+    public RadioState()
+    {
+        Waves.Add("FM", new Wave("FM"));
+        Waves.Add("SW", new Wave("SW"));
+        Waves.Add("AM", new Wave("AM"));
+    }
+}
+
+public class Wave
+{
+    public float Min = 0;
+    public float Max = 0;
+
+    public Entity entity;
+
+    public List<bool> Enabled = new();
+    public Wave(string key)
+    {
+        entity = Main.ECS.Get($"Wave/{key}");
+        var tagWave = entity.Get<TagWave>();
+        
+        Enabled = new(tagWave.Enabled);
+        Min = tagWave.Min;
+        Max = tagWave.Max;
+    }
+}
+
+public class Radio : MonoBehaviour, ISingleton
 {
     [SerializeField] private WaveChanger _waveChanger;
     [SerializeField] private Volume _volume;
@@ -22,8 +55,8 @@ public class Radio : MonoBehaviour
 
     private int _dynamicIndex = 0;
     private float _currentTime = 0f;
-    private Entity _wave;
-    public Entity Wave => _wave;
+    private RadioState _state;
+    public RadioState State => _state;
 
     private bool _isEnabled = false;
     public bool IsEnabled => _isEnabled;
@@ -33,7 +66,7 @@ public class Radio : MonoBehaviour
     private AudioSource _radio;
     public AudioSource AudioSource => _radio;
 
-    public readonly UnityEvent<Entity, Entity> WaveChanged = new();
+    public readonly UnityEvent<Wave, Wave> WaveChanged = new();
     private void Awake()
     {
         _button.onClick.AddListener(OnButtonClick);
@@ -42,6 +75,7 @@ public class Radio : MonoBehaviour
         _noise.loop = true;
         _noise.volume = 0f;
         _tuning.ValueChanged.AddListener(ChangeClip);
+        _state = new();
     }
 
     private void OnButtonClick()
@@ -57,7 +91,7 @@ public class Radio : MonoBehaviour
         _volume.Init();
         _waveChanger.Init();
 
-        ChangeWave(Main.ECS.Get("Wave/FM"));
+        ChangeWave(_state.Waves["FM"]);
         ChangeClip();
         _radio.volume = 0;
         _radio.Play();
@@ -88,29 +122,39 @@ public class Radio : MonoBehaviour
 
     private void ChangeClip()
     {
-        var tagWave = Wave.Get<TagWave>();
+        var wave = _state.CurrentWave;
+        var tagWave = wave.entity.Get<TagWave>();
+
         int index = tagWave.Ranges
         .Select((v, i) => new { Value = v, Index = i })
-        .FirstOrDefault(x => tagWave.Enabled[x.Index] && x.Value.x <= _tuning.CurrentValue && _tuning.CurrentValue <= x.Value.y)
+        .FirstOrDefault(x => wave.Enabled[x.Index] && x.Value.x <= _tuning.CurrentValue && _tuning.CurrentValue <= x.Value.y)
         ?.Index ?? -1;
 
         var oldClip = _radio.clip;
         var newClip = index == -1 ? null : tagWave.Clips[index];
         if (oldClip != newClip)
         {
-            if (newClip == null) return;
             _radio.clip = newClip;
-            var time = _currentTime % newClip.length;
-            _radio.time = time;
+            if (_radio.clip != null)
+            {
+                var time = _currentTime % newClip.length;
+                _radio.time = time;
+            }
+
             _radio.Play();
+
+            var events = Main.EventSystem.FindAll<IOnClipChanged>();
+            foreach (var e in events) StartCoroutine(e.OnChanged(oldClip, newClip));
         }
     }
 
-    public void ChangeWave(Entity wave)
+    public void ChangeWave(Wave wave)
     {
-        var old = _wave;
-        _wave = wave;
-        WaveChanged.Invoke(old, _wave);
+        var old = _state.CurrentWave;
+        _state.CurrentWave = wave;
+        WaveChanged.Invoke(old, _state.CurrentWave);
+        var events = Main.EventSystem.FindAll<IOnWaveChanged>();
+        foreach (var e in events) StartCoroutine(e.OnChanged(old, _state.CurrentWave));
         ChangeClip();
     }
 
@@ -126,9 +170,11 @@ public class Radio : MonoBehaviour
 
             _dynamicIndex = (_dynamicIndex + 1) % _dynamicSprites.Count;
             _dynamic.sprite = _dynamicSprites[_dynamicIndex];
-            yield return new WaitForSecondsRealtime(0.25f); 
+            yield return new WaitForSecondsRealtime(0.25f);
         }
     }
+
+    public void Initialize() { }
 }
 public class TagWave : Tag
 {
@@ -141,3 +187,6 @@ public class TagWave : Tag
     [MinMaxSlider(nameof(Min), nameof(Max), ShowFields = true)]
     [HorizontalGroup] public List<Vector2Int> Ranges = new();
 }
+
+public interface IOnWaveChanged { public IEnumerator OnChanged(Wave oldWave, Wave newWave); }
+public interface IOnClipChanged { public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip); }

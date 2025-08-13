@@ -35,6 +35,8 @@ public class Main : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initiallize()
     {
+        if (!PlayerPrefs.HasKey("volume")) PlayerPrefs.SetFloat("volume", 0.1f);
+
         Instance = null;
 
         DOTween.SetTweensCapacity(1000, 200);
@@ -51,6 +53,13 @@ public class Main : MonoBehaviour
         DontDestroyOnLoad(Instance);
     }
 
+    public static void ChangeScreen()
+    {
+        var bol = PlayerPrefs.GetInt("fullscreen") == 1;
+        Screen.fullScreen = bol;
+        if (bol) Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, FullScreenMode.FullScreenWindow);
+    }
+
     private static void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         Instance.All.Clear();
@@ -62,6 +71,7 @@ public class Main : MonoBehaviour
 
     private void Awake()
     {
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);

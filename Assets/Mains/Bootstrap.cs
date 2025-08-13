@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class Bootstrap : MonoBehaviour
@@ -26,9 +25,9 @@ public class Bootstrap : MonoBehaviour
     private IEnumerator Hello()
     {
         var subs = Main.Get<Subtitles>();
-        subs.Type("Игра сделана за 7 дней\n для геймджема от MyIndie\n\n by TrueBuch & Bruhman");
+        subs.Type(false, "Игра сделана за 7 дней\n для геймджема от MyIndie\n\n by TrueBuch & Bruhman");
         yield return new WaitUntil(() => !subs.IsPlaying);
-
+        yield return new WaitForSecondsRealtime(1f);
         Main.SceneTransition.SwitchToScene("Menu");
     }
         

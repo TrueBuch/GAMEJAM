@@ -19,6 +19,9 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private int _pixelCountX = 16;
     [SerializeField] private int _pixelCountY = 9;
 
+    private int _lastWidth;
+    private int _lastHeight;
+
     private GameObject[,] _pixels;
     public readonly UnityEvent<bool> TransitionCompleted = new();
 
@@ -29,6 +32,10 @@ public class SceneTransition : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        _lastWidth = Screen.width;
+        _lastHeight = Screen.height;
+
         GeneratePixels();
         DontDestroyOnLoad(this);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -44,27 +51,24 @@ public class SceneTransition : MonoBehaviour
         if (_playOpenAnimation) StartCoroutine(PlayAnimation(false));
     }
 
+    private void Update()
+    {
+        if (Screen.width != _lastWidth || Screen.height != _lastHeight)
+        {
+            _lastWidth = Screen.width;
+            _lastHeight = Screen.height;
+
+            UpdatePixelsLayout();
+        }
+    }
+
     private void GeneratePixels()
     {
-        int width = Screen.width;
-        int height = Screen.height;
+        _pixels = new GameObject[_pixelCountX, _pixelCountY];
 
-        float spriteSizeX = (float)width / _pixelCountX;
-        float spriteSizeY = (float)height / _pixelCountY;
-
-        float spriteSize = Mathf.Min(spriteSizeX, spriteSizeY);
-
-        int countX = Mathf.FloorToInt(width / spriteSize) + 1;
-        int countY = Mathf.FloorToInt(height / spriteSize) + 1;
-
-        _pixels = new GameObject[countX, countY];
-
-        float startX = -width / 2f + spriteSize / 2f;
-        float startY = -height / 2f + spriteSize / 2f;
-
-        for (int i = 0; i < countX; i++)
+        for (int i = 0; i < _pixelCountX; i++)
         {
-            for (int j = 0; j < countY; j++)
+            for (int j = 0; j < _pixelCountY; j++)
             {
                 GameObject obj = Instantiate(_pixelPrefab, transform);
                 obj.SetActive(false);
@@ -72,12 +76,32 @@ public class SceneTransition : MonoBehaviour
 
                 obj.name = $"Image_{i}_{j}";
 
-                RectTransform rectTransform = obj.GetComponent<RectTransform>();
                 Image image = obj.GetComponent<Image>();
-
                 int randomIndex = Random.Range(0, _sprites.Count);
                 image.sprite = _sprites[randomIndex];
+            }
+        }
 
+        UpdatePixelsLayout();
+    }
+
+    private void UpdatePixelsLayout()
+    {
+        int width = Screen.width;
+        int height = Screen.height;
+
+        float spriteSizeX = (float)width / _pixelCountX;
+        float spriteSizeY = (float)height / _pixelCountY;
+        float spriteSize = Mathf.Max(spriteSizeX, spriteSizeY);
+
+        float startX = -width / 2f + spriteSize / 2f;
+        float startY = -height / 2f + spriteSize / 2f;
+
+        for (int i = 0; i < _pixelCountX; i++)
+        {
+            for (int j = 0; j < _pixelCountY; j++)
+            {
+                RectTransform rectTransform = _pixels[i, j].GetComponent<RectTransform>();
                 rectTransform.sizeDelta = new(spriteSize, spriteSize);
 
                 float posX = startX + i * spriteSize;

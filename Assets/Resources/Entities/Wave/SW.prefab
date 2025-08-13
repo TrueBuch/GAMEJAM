@@ -55,10 +55,10 @@ MonoBehaviour:
       data:
         Min: 3
         Max: 30
-        enabled: 0000
-        key:
-        - cosmos
-        - nnm
+        Enabled: 0000
+        Keys:
+        - 
+        - 
         Clips:
         - {fileID: 0}
         - {fileID: 0}

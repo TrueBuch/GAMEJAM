@@ -155,30 +155,7 @@ public class Entity
             _components[type] = component;
         }
     }
-
-    public Entity Clone()
-    {
-        var clone = new Entity();
-        clone.ID = ID;
-
-        foreach (var tag in _components)
-        {
-            if (tag.Value is ICloneableTag cloneable)
-            {
-                clone._components[tag.Key] = cloneable.Clone();
-            }
-            else
-            {
-                clone._components[tag.Key] = tag.Value;
-            }
-        }
-
-        return clone;
-    }
 }
 
 [Serializable]
-public abstract class Tag
-{}
-
-public interface ICloneableTag {public Tag Clone();}
+public abstract class Tag {}

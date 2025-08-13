@@ -48,38 +48,41 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.1.13f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Game\Gazeta.cs" />
     <Compile Include="Assets\Core\Components\Draggable.cs" />
     <Compile Include="Assets\Core\Input\Input.cs" />
-    <Compile Include="Assets\Scripts\Book.cs" />
     <Compile Include="Assets\Core\EntitySystem\ECS.cs" />
     <Compile Include="Assets\Core\Components\Selectable.cs" />
-    <Compile Include="Assets\Scripts\Clock.cs" />
+    <Compile Include="Assets\Scripts\Game\Tuning.cs" />
     <Compile Include="Assets\Core\Main.cs" />
-    <Compile Include="Assets\Scripts\BookFull.cs" />
-    <Compile Include="Assets\Scripts\Noise.cs" />
     <Compile Include="Assets\Mains\Menu.cs" />
-    <Compile Include="Assets\Scripts\Lamp.cs" />
-    <Compile Include="Assets\Scripts\Radio.cs" />
-    <Compile Include="Assets\Scripts\Tuning.cs" />
     <Compile Include="Assets\Core\Input\PlayerInput.cs" />
     <Compile Include="Assets\Core\Util\GameMath.cs" />
     <Compile Include="Assets\Core\GameConfig.cs" />
-    <Compile Include="Assets\Scripts\CanvasChanger.cs" />
-    <Compile Include="Assets\Scripts\Subtitles.cs" />
+    <Compile Include="Assets\Scripts\Game\Book.cs" />
+    <Compile Include="Assets\Scripts\Game\Snow.cs" />
+    <Compile Include="Assets\Scripts\Game\WaveChanger.cs" />
+    <Compile Include="Assets\Scripts\Game\GazetaFull.cs" />
     <Compile Include="Assets\Core\EventSystem.cs" />
     <Compile Include="Assets\Core\EntitySystem\EntityPrefab.cs" />
     <Compile Include="Assets\Core\SceneTransition.cs" />
+    <Compile Include="Assets\Scripts\Game\Lamp.cs" />
     <Compile Include="Assets\Core\Util\Reflection.cs" />
+    <Compile Include="Assets\Scripts\Menu\SettingsMenu.cs" />
+    <Compile Include="Assets\Scripts\Game\Subtitles.cs" />
     <Compile Include="Assets\Mains\Bootstrap.cs" />
-    <Compile Include="Assets\Scripts\Locale.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
     <Compile Include="Assets\Core\Util\Text.cs" />
-    <Compile Include="Assets\Scripts\GazetaFull.cs" />
+    <Compile Include="Assets\Scripts\Game\CanvasChanger.cs" />
     <Compile Include="Assets\Mains\Game.cs" />
-    <Compile Include="Assets\Scripts\Notebook.cs" />
-    <Compile Include="Assets\Scripts\Gazeta.cs" />
-    <Compile Include="Assets\Scripts\WaveChanger.cs" />
-    <Compile Include="Assets\Scripts\Volume.cs" />
+    <Compile Include="Assets\Scripts\Game\Noise.cs" />
+    <Compile Include="Assets\Scripts\Game\Notebook.cs" />
+    <Compile Include="Assets\Scripts\Game\Clock.cs" />
+    <Compile Include="Assets\Scripts\Game\BookFull.cs" />
+    <Compile Include="Assets\Scripts\Game\Volume.cs" />
+    <Compile Include="Assets\Scripts\Game\Locale.cs" />
     <Compile Include="Assets\Core\EntitySystem\Content.cs" />
+    <Compile Include="Assets\Scripts\Game\Radio.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

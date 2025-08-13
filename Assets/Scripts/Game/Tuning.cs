@@ -18,8 +18,8 @@ public class Tuning : MonoBehaviour, ISelectable
     private int _currentIndex;
     private Image _image;
 
-    private float _currentValue;
-    public float CurrentValue => _currentValue;
+    private int _currentValue;
+    public int CurrentValue => _currentValue;
 
     private bool _isHovering;
 
@@ -37,21 +37,21 @@ public class Tuning : MonoBehaviour, ISelectable
         _radio.WaveChanged.AddListener(OnWaveChanged);
     }
 
-    private void OnWaveChanged(Entity old, Entity wave)
+    private void OnWaveChanged(Wave old, Wave wave)
     {
-        var newMin = wave.Get<TagWave>().Min;
-        var newMax = wave.Get<TagWave>().Max;
-
+        var newMin = wave.Min;
+        var newMax = wave.Max;
+        var newValue = (float) _currentValue;
         if (old != null)
         {
-            var oldMin = old.Get<TagWave>().Min;
-            var oldMax = old.Get<TagWave>().Max;
+            var oldMin = old.Min;
+            var oldMax = old.Max;
 
             float percent = (_currentValue - oldMin) / (oldMax - oldMin);
-            _currentValue = newMin + percent * (newMax - newMin);
+            newValue = newMin + percent * (newMax - newMin);
         }
-        _currentValue = Mathf.Clamp(_currentValue, newMin, newMax);
-        _currentValue = Mathf.RoundToInt(_currentValue);
+        newValue = Mathf.Clamp(newValue, newMin, newMax);
+        _currentValue = Mathf.RoundToInt(newValue);
     }
 
     private void Update()
@@ -70,22 +70,28 @@ public class Tuning : MonoBehaviour, ISelectable
         if (!_isHovering) return;
 
         var delta = _input.Scroll.y;
-
         var newValue = _currentValue + delta * _sensivity;
-        newValue = Mathf.Clamp(newValue, _radio.Wave.Get<TagWave>().Min, _radio.Wave.Get<TagWave>().Max);
+
+        var wave = _radio.State.CurrentWave;
+        newValue = Mathf.Clamp(newValue, wave.Min, wave.Max);
+        newValue = Mathf.RoundToInt(newValue);
+
         if (newValue != _currentValue)
         {
+            _currentValue = Mathf.RoundToInt(newValue);
             ValueChanged.Invoke();
+
             _currentIndex = (_currentIndex + 1) % _sprites.Count;
             _image.sprite = _sprites[_currentIndex];
         }
-        _currentValue = newValue;
+
         if (delta != 0)
         {
-            float percent = (_currentValue - _radio.Wave.Get<TagWave>().Min) / (_radio.Wave.Get<TagWave>().Max - _radio.Wave.Get<TagWave>().Min);
+            float percent = (_currentValue - wave.Min) /
+                            (wave.Max - wave.Min);
             var arrowIndex = Mathf.RoundToInt(percent * (_arrowSprites.Count - 1));
             _arrowImage.sprite = _arrowSprites[arrowIndex];
-        } 
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
