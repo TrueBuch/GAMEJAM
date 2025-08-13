@@ -49,23 +49,29 @@ public class BookFull : MonoBehaviour
     {
         page = Math.Max(0, page - 1);
         UpdateView();
+
+        var events = Main.EventSystem.FindAll<IOnPageChanged>();
+        foreach (var e in events) StartCoroutine(e.OnChanged(page));
     }
 
     private void OnRightButtonClicked()
     {
         page = Math.Min(page + 1, _book.IsNormal ? _defaultPages.Count - 1 : _nnmPages.Count - 1);
         UpdateView();
+
+        var events = Main.EventSystem.FindAll<IOnPageChanged>();
+        foreach (var e in events) StartCoroutine(e.OnChanged(page));
     }
 
-    private void UpdateView()
+    public void UpdateView()
     {
+
+        page = Math.Min(page, _book.IsNormal ? _defaultPages.Count - 1 : _nnmPages.Count - 1);
         _image.sprite = _book.IsNormal ? _defaultPages[page] : _nnmPages[page];
         _left.gameObject.SetActive(page != 0);
 
         _right.gameObject.SetActive(_book.IsNormal ? page != _defaultPages.Count - 1 : page != _nnmPages.Count - 1);
 
-        var events = Main.EventSystem.FindAll<IOnPageChanged>();
-        foreach (var e in events) StartCoroutine(e.OnChanged(page));
     }
 
     public void OnRightClickStarted()
