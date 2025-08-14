@@ -133,11 +133,7 @@ public class OnListenStartMorse : Event, IOnClipChanged
             
             yield return new WaitForSecondsRealtime(2f);
             subs.Type(Voice.NONE, false, 0.25f, ".");
-            if (!Main.Get<Radio>().IsCurrent("start_morse"))
-            {
-                IsPlaying = false;
-                yield break;
-            }
+
             yield return new WaitForSecondsRealtime(2f);
             if (!Main.Get<Radio>().IsCurrent("start_morse"))
             {
@@ -145,7 +141,6 @@ public class OnListenStartMorse : Event, IOnClipChanged
                 yield break;
             }
             subs.Type(Voice.NONE, false, 0.25f, "-");
-            
             yield return new WaitForSecondsRealtime(2f);
             if (!Main.Get<Radio>().IsCurrent("start_morse"))
             {
