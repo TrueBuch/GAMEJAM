@@ -88,7 +88,32 @@ public class Listen102Wave : Event, IOnClipChanged, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "not_find_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
+        yield return new WaitForSecondsRealtime(2f);
+        Main.Get<Radio>().SetEnable("FM", "start", false);
+        Main.Get<Radio>().SetEnable("FM", "start_morse", true);
         Main.Get<Gazeta>().GazetaFull.Change(1);
+    }
+}
+
+public class OnListenStartMorse : Event, IOnClipChanged
+{
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
+    {
+        if (newClip == null) yield break;
+        if (!Main.Get<Radio>().IsCurrent("start_morse")) yield break;
+        // --. .- --.. . - .- газета
+        var subs = Main.Get<Subtitles>();
+        subs.Type(Voice.NONE, false, 0.25f, "--.");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, ".-");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "--..");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, ".");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "-");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, true, 0.25f, ".-");
     }
 }
 
