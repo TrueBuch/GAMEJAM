@@ -77,9 +77,38 @@ public class CanvasChanger : MonoBehaviour, ISingleton
 
         var events = Main.EventSystem.FindAll<IOnCanvasChanged>();
         foreach (var e in events) StartCoroutine(e.OnChanged(_currentIndex));
+
+        yield break;
     }
 
     public void Initialize() { }
+
+    public void ChangeCanvas(int index)
+    {
+        if (_currentIndex == index) return;
+        StartCoroutine(ChangeAnimCanvas(1));
+    }
+    public IEnumerator ChangeAnimCanvas(int index)
+    {
+        while (_currentIndex != index)
+        {
+            yield return Change(1);
+        }
+    }
+
+    public float GetPanStereo( int targetIndex)
+    {
+        int diff = (targetIndex - _currentIndex + 4) % 4;
+
+        return diff switch
+        {
+            0 => 0f,   // Front
+            1 => 0.75f,  // Right
+            2 => 0f,   // Back
+            3 => -0.75f,   // Left
+            _ => 0f
+        };
+    }
 }
 
 public interface IOnCanvasChanged

@@ -11,6 +11,7 @@ public class Clock : MonoBehaviour, ISingleton
     [SerializeField] private AudioClip _dindon;
     [SerializeField] private Image _image;
     [SerializeField] private List<Sprite> _sprites;
+    [SerializeField] private CanvasChanger _canvasChanger;
     private int _index;
     public int Index => _index;
 
@@ -28,6 +29,7 @@ public class Clock : MonoBehaviour, ISingleton
 
     private void Start()
     {
+        _canvasChanger = Main.Get<CanvasChanger>();
         StartCoroutine(ClockAnim());
         StartCoroutine(ClockSound());
     }
@@ -59,6 +61,11 @@ public class Clock : MonoBehaviour, ISingleton
                 yield return new WaitForSecondsRealtime(_dindon.length);
             }
         }
+    }
+
+    private void Update()
+    {
+        _source.panStereo = _canvasChanger.GetPanStereo(2);
     }
 
     public void PlayDindon()

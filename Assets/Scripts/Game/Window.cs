@@ -11,6 +11,7 @@ public class Window : MonoBehaviour, ISingleton
     [SerializeField] private List<Sprite> _scarySpites;
     [SerializeField] private GameObject _snow;
     public bool CodeViewed = false;
+    public bool IsScary = false;
     private int index;
 
     private IEnumerator ScaryAnimation()
@@ -39,6 +40,7 @@ public class Window : MonoBehaviour, ISingleton
 
     public void StartScary()
     {
+        IsScary = true;
         _code.gameObject.SetActive(false);
         _scary.gameObject.SetActive(true);
     }

@@ -89,6 +89,12 @@ public class Radio : MonoBehaviour, ISingleton
         _button.image.sprite = _isEnabled ? _buttonSprites[1] : _buttonSprites[0];
     }
 
+    public void Change(bool isEnabled)
+    {
+        _isEnabled = isEnabled;
+        _button.image.sprite = _isEnabled ? _buttonSprites[1] : _buttonSprites[0];
+    }
+
     private void Start()
     {
         StartCoroutine(DynamicAnim());

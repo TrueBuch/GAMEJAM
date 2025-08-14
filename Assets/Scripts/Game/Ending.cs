@@ -62,7 +62,43 @@ public class Ending : MonoBehaviour, ISingleton
 
     public IEnumerator SecondEnding()
     {
-        yield break;
+        yield return StartCoroutine(FlashAnimation(false));
+
+        yield return new WaitForSecondsRealtime(1f);
+        yield return StartCoroutine(FadeAnimation());
+
+        var subs = Main.Get<Subtitles>();
+
+        subs.TypeByKey(Voice.DOCTOR1, true, "ending_2_1C");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR2, true, "ending_2_2C");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR1, true, "ending_2_1C_1");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR2, true, "ending_2_2C_1");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR1, true, "ending_2_1C_2");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR2, true, "ending_2_2C_2");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR2, true, "ending_2_2C_2_1");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR1, true, "ending_2_1C_3");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+
+        Main.Get<Game>().Source.panStereo = 0f;
+        Main.Get<Game>().Source.PlayOneShot(Main.Get<Game>().FinalNoise);
+        yield return new WaitForSecondsRealtime(5f);
+        subs.TypeByKey(Voice.DOCTOR2, true, "ending_2_2C_3");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.DOCTOR1, true, "ending_2_1C_4");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        yield return new WaitForSecondsRealtime(2f);
+        subs.TypeByKey(Voice.SPEC, true, ".. .--. .- ... .. -... ---  --.. .-  .. --. .-. ..-");
+        
+
+        yield return new WaitForSecondsRealtime(5f);
+        Main.SceneTransition.SwitchToScene("Menu");
     }
 
     public IEnumerator FlashAnimation(bool isFirst)
