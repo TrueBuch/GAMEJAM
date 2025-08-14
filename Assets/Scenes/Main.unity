@@ -3688,10 +3688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerVoice:
-  - {fileID: 8300000, guid: 1a3bb3ec2b8b1b14aaefd62ca0f37044, type: 3}
-  - {fileID: 8300000, guid: 416ac516ac8103342842b4ef6e0fe787, type: 3}
-  - {fileID: 8300000, guid: 0923ba804cee1084383a7a74acfb2da9, type: 3}
-  - {fileID: 8300000, guid: 69a1001ea46b62646a01d0bfa0870b51, type: 3}
+  - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
   _monsterVoice:
   - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
   _doctor1Voice:

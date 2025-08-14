@@ -61,21 +61,6 @@ public class Enable102Wave : Event, IOnPageChanged, IOnGameStarted
 
 }
 
-// public class WindowAndCode : Event, IOnFMEventCompleted, IOnGameStarted
-// {
-//     private bool _invoked = false;
-//     public IEnumerator OnStarted()
-//     {
-//         _invoked = false;
-//         yield break;
-//     }
-
-//     public IEnumerator OnCompleted()
-//     {
-//         throw new System.NotImplementedException();
-//     }
-// }
-
 public interface IOnFMEventCompleted
 {
     public IEnumerator OnCompleted();
@@ -174,7 +159,7 @@ public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
         yield return new WaitForSecondsRealtime(5f);
         subs.TypeByKey(Voice.PLAYER, true, "cosmos");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        Main.Get<Clock>().ChangeDon();
+        Main.Get<Clock>().ChangeDon(1);
     }
 }
 
@@ -240,7 +225,7 @@ public class OBERNIS : Event, IOnNotebookUp, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "looked_at_notebook_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        Main.Get<Clock>().ChangeDon();
+        Main.Get<Clock>().ChangeDon(2);
     }
 }
 
@@ -430,7 +415,7 @@ public class FourthDon : Event, IOnDonChanged, IOnGameStarted
     }
 }
 
-public class EnterMinus13Code : Event, IOnClipChanged, IOnGameStarted
+public class ListenMinus13Wave : Event, IOnClipChanged, IOnGameStarted
 {
     private bool _invoked = false;
     public IEnumerator OnStarted()
@@ -439,10 +424,7 @@ public class EnterMinus13Code : Event, IOnClipChanged, IOnGameStarted
         yield break;
     }
 
-    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
-    {
-        throw new System.NotImplementedException();
-    }
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip) { yield break; }
 }
 
 public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
@@ -465,6 +447,7 @@ public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window");
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window_1");
+        Main.Get<Chair>().ChangeState(false);
     }
 }
 
@@ -483,6 +466,7 @@ public class OnCodeSee : Event, IOnCanvasChanged, IOnGameStarted
         if (index != 0) yield break;
         if (!Main.Get<Window>().CodeViewed) yield break;
         _invoked = true;
+        Main.Get<Clock>().ChangeDon(3);
         var subs = Main.Get<Subtitles>();
         subs.TypeByKey(Voice.PLAYER, true, "looked_at_window");
         Main.Get<Painting>().ChangeState(2);
@@ -490,7 +474,7 @@ public class OnCodeSee : Event, IOnCanvasChanged, IOnGameStarted
     }
 }
 
-public class DevilBookOpened : IOnGameStarted, IOnPageChanged
+public class DevilBookOpened : Event, IOnGameStarted, IOnPageChanged
 {
     private bool _invoked = false;
     public IEnumerator OnStarted()
@@ -508,7 +492,7 @@ public class DevilBookOpened : IOnGameStarted, IOnPageChanged
     }
 }
 
-public class SW13Listened : IOnGameStarted, IOnClipChanged
+public class SW13Listened : Event, IOnGameStarted, IOnClipChanged
 {
     private bool _invoked = false;
     public IEnumerator OnStarted()
@@ -529,10 +513,31 @@ public class SW13Listened : IOnGameStarted, IOnClipChanged
         subs.TypeByKey(Voice.PLAYER, true, "found_code_in_nnm");
         yield return new WaitForSecondsRealtime(15f);
 
-        Main.Get<Clock>().ChangeDon();
+        Main.Get<Clock>().ChangeDon(4);
     }
+}
 
+public class NormalChairClicked : Event, IOnChairClicked
+{
+    public IEnumerator OnClicked(bool IsNormal)
+    {
+        if (!IsNormal) yield break;
 
+        var subs = Main.Get<Subtitles>();
+        subs.Type(Voice.PLAYER, true, "Классный стул");
+    }
+}
+
+public class NeNormalChairClicked : Event, IOnChairClicked
+{
+    public IEnumerator OnClicked(bool IsNormal)
+    {
+        if (IsNormal) yield break;
+        if (Main.Get<Clock>().Index == 4) yield break; 
+
+        var subs = Main.Get<Subtitles>();
+        subs.Type(Voice.PLAYER, true, "Но как оно там оказалось?");
+    }
 }
 
 public interface IOnGameStarted { public IEnumerator OnStarted(); }

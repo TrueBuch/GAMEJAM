@@ -32,9 +32,9 @@ public class Clock : MonoBehaviour, ISingleton
         StartCoroutine(ClockSound());
     }
 
-    public void ChangeDon()
+    public void ChangeDon(int index)
     {
-        _currentDon++;
+        _currentDon = index;
         var events = Main.EventSystem.FindAll<IOnDonChanged>();
         PlayDindon();
         Debug.Log($"Don changed - {_currentDon}");

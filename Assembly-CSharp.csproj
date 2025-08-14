@@ -53,6 +53,7 @@
     <Compile Include="Assets\Core\Components\Draggable.cs" />
     <Compile Include="Assets\Core\Input\Input.cs" />
     <Compile Include="Assets\Core\EntitySystem\ECS.cs" />
+    <Compile Include="Assets\Scripts\Game\Chair.cs" />
     <Compile Include="Assets\Core\Components\Selectable.cs" />
     <Compile Include="Assets\Scripts\Game\Painting.cs" />
     <Compile Include="Assets\Scripts\Game\Tuning.cs" />
