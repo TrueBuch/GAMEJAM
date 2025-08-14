@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class Game : MonoBehaviour, ISingleton
 {
     public bool FMEvent = false;
     public int ListenCount = 0;
+    public bool MonsterSays = false;
+
     public void Initialize()
     {
         Main.SceneTransition.TransitionCompleted.AddListener(OnSceneStarted);
@@ -25,6 +28,11 @@ public class Game : MonoBehaviour, ISingleton
         Debug.Log("FMEvent completed");
         var events = Main.EventSystem.FindAll<IOnFMEventCompleted>();
         foreach (var e in events) StartCoroutine(e.OnCompleted());
+    }
+
+    public void StartEnding(bool isFirst)
+    {
+        Main.Get<Ending>().StarEndind(isFirst);
     }
 }
 
@@ -97,23 +105,30 @@ public class Listen102Wave : Event, IOnClipChanged, IOnGameStarted
 
 public class OnListenStartMorse : Event, IOnClipChanged
 {
+    private bool IsPlaying = false;
     public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
     {
         if (newClip == null) yield break;
         if (!Main.Get<Radio>().IsCurrent("start_morse")) yield break;
         // --. .- --.. . - .- газета
-        var subs = Main.Get<Subtitles>();
-        subs.Type(Voice.NONE, false, 0.25f, "--.");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, ".-");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "--..");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, ".");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "-");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, true, 0.25f, ".-");
+        if (!IsPlaying)
+        {
+            IsPlaying = true;
+            var subs = Main.Get<Subtitles>();
+            subs.Type(Voice.NONE, false, 0.25f, "--.");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, ".-");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "--..");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, ".");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "-");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, true, 0.25f, ".-");
+            IsPlaying = false;
+        }
+
     }
 }
 
@@ -164,6 +179,7 @@ public class OnGlitchedGazetaOpened : Event, IOnGazetaOpened, IOnGameStarted
 public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
 {
     //.---- ----. -.- --- ... -- --- ...
+    private bool IsPlaying = false;
     private bool _invoked = false;
     public IEnumerator OnStarted()
     {
@@ -179,22 +195,27 @@ public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
         var radio = Main.Get<Radio>();
         var subs = Main.Get<Subtitles>();
         radio.SetEnable("SW", "bipbip", true);
+        if (!IsPlaying)
+        {
+            IsPlaying = true;
+            subs.Type(Voice.NONE, false, 0.25f, ".----");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "----.");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "-.-");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "---");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "...");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, true, 0.25f, "--");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, true, 0.25f, "---");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, true, 0.25f, "...");
+            IsPlaying = false;
+        }
 
-        subs.Type(Voice.NONE, false, 0.25f, ".----");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "----.");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "-.-");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "---");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "...");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, true, 0.25f, "--");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, true, 0.25f, "---");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, true, 0.25f, "...");
 
         if (_invoked) yield break;
         _invoked = true;
@@ -245,6 +266,7 @@ public class Sw18Listen : Event, IOnClipChanged, IOnGameStarted
 
 public class Sw18MorzeListen : Event, IOnClipChanged
 {
+    private bool IsPlaying = false;
     //-... .-.. --- -.- -. --- -
     public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
     {
@@ -253,20 +275,24 @@ public class Sw18MorzeListen : Event, IOnClipChanged
         if (!Main.Get<Radio>().IsCurrent("bipbip_code")) yield break;
 
         var subs = Main.Get<Subtitles>();
-
-        subs.Type(Voice.NONE, false, 0.25f, "-...");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, ".-..");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "---");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "-.-");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, false, 0.25f, "-.");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, true, 0.25f, "---");
-        yield return new WaitForSecondsRealtime(2f);
-        subs.Type(Voice.NONE, true, 0.25f, "-");
+        if (!IsPlaying)
+        {
+            IsPlaying = true;
+            subs.Type(Voice.NONE, false, 0.25f, "-...");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, ".-..");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "---");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "-.-");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, false, 0.25f, "-.");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, true, 0.25f, "---");
+            yield return new WaitForSecondsRealtime(2f);
+            subs.Type(Voice.NONE, true, 0.25f, "-");
+            IsPlaying = false;
+        }
 
         Main.Get<Notebook>().notebook = true;
     }
@@ -417,6 +443,7 @@ public class FirstDon : Event, IOnDonChanged
 
     public IEnumerator OnChanged(int value)
     {
+        if (_invoked) yield break;
         if (value != 1) yield break;
         _invoked = true;
     }
@@ -433,6 +460,7 @@ public class SecondDon : Event, IOnDonChanged
 
     public IEnumerator OnChanged(int value)
     {
+        if (_invoked) yield break;
         if (value != 2) yield break;
         _invoked = true;
         Main.Get<Gazeta>().GazetaFull.Change(2);
@@ -478,8 +506,64 @@ public class FourthDon : Event, IOnDonChanged, IOnGameStarted
         subs.TypeByKey(Voice.MONSTER, true, "last_din_1");
         Main.Get<Radio>().State.Waves["SW"].Min = -13;
         Main.Get<Radio>().SetEnable("SW", "minus_wave", true);
+        Main.Get<Game>().MonsterSays = true;
         yield return new WaitUntil(() => !subs.IsPlaying);
         
+        yield return new WaitForSecondsRealtime(1f);
+        subs.TypeByKey(Voice.MONSTER, true, "enter_code");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.MONSTER, true, "enter_code_1");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.MONSTER, true, "enter_code_2");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+    }
+}
+
+public class OnRotatedMinusWave : Event, IOnCanvasChanged, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnChanged(int index)
+    {
+        if (!Main.Get<Game>().MonsterSays) yield break;
+        if (_invoked) yield break;
+
+        _invoked = true;
+        var subs = Main.Get<Subtitles>();
+        subs.TypeByKey(Voice.MONSTER, true, "rotated");
+    }
+}
+
+public class OnChairClickedMonster : Event, IOnChairClicked, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+    public IEnumerator OnClicked(bool IsNormal)
+    {
+        if (_invoked) yield break;
+        if (IsNormal) yield break;
+        if (!Main.Get<Game>().MonsterSays) yield break;
+        _invoked = true;
+
+        var subs = Main.Get<Subtitles>();
+
+        subs.TypeByKey(Voice.MONSTER, true, "ending_1_clicked_on_chair");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.MONSTER, true, "ending_1_clicked_on_chair_1");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.MONSTER, true, "ending_1_clicked_on_chair_2");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        yield return new WaitForSecondsRealtime(2f);
+        Main.Get<Game>().StartEnding(true);
     }
 }
 
@@ -601,7 +685,7 @@ public class NeNormalChairClicked : Event, IOnChairClicked
     public IEnumerator OnClicked(bool IsNormal)
     {
         if (IsNormal) yield break;
-        if (Main.Get<Clock>().Index == 4) yield break; 
+        if (Main.Get<Game>().MonsterSays) yield break; 
 
         var subs = Main.Get<Subtitles>();
         subs.Type(Voice.PLAYER, true, "Но как оно там оказалось?");
