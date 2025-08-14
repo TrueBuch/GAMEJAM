@@ -55,10 +55,13 @@ MonoBehaviour:
       data:
         Min: 540
         Max: 1600
-        Enabled: 00
+        Enabled: 0000
         Keys:
         - cosmos
+        - devil
         Clips:
         - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
+        - {fileID: 0}
         Ranges:
         - {x: 990, y: 1095}
+        - {x: 666, y: 666}

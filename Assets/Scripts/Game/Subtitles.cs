@@ -1,14 +1,18 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 
 public class Subtitles : MonoBehaviour, ISingleton
 {
-    public void Initialize() {}
+    public void Initialize() { }
 
-    [SerializeField] private AudioClip _clip;
+    [SerializeField] private List<AudioClip> _playerVoice;
+    [SerializeField] private List<AudioClip> _monsterVoice;
+    [SerializeField] private List<AudioClip> _doctor1Voice;
+    [SerializeField] private List<AudioClip> _doctor2Voice;
     private AudioSource _source;
     private TMP_Text _text;
     private Coroutine _coroutine;
@@ -21,56 +25,83 @@ public class Subtitles : MonoBehaviour, ISingleton
         _text = GetComponent<TMP_Text>();
     }
 
-    public void TypeByKey(bool delete, string key)
+    public void TypeByKey(Voice voice, bool delete, string key)
     {
         var text = Locale.Get(key);
-        Type(delete, text);
+        Type(voice, delete, text);
     }
 
-    public void TypeByKey(bool delete, float delay, string key)
+    public void TypeByKey(Voice voice, bool delete, float delay, string key)
     {
         var text = Locale.Get(key);
-        Type(delete, delay, text);
+        Type(voice, delete, delay, text);
     }
 
-    public void Type(bool delete, string text)
+    public void Type(Voice voice, bool delete, string text)
     {
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
             _text.text = "";
         }
-        _coroutine = StartCoroutine(Play(delete, -1,text));
+        _coroutine = StartCoroutine(Play(voice, delete, -1, text));
     }
 
-    public void Type(bool delete, float delay, string text)
+    public void Type(Voice voice, bool delete, float delay, string text)
     {
         if (_coroutine != null)
         {
             StopCoroutine(_coroutine);
             _text.text = "";
         }
-        _coroutine = StartCoroutine(Play(delete, delay, text));
+        _coroutine = StartCoroutine(Play(voice, delete, delay, text));
     }
 
-    private IEnumerator Play(bool delete, float delay, string text)
+    private IEnumerator Play(Voice voice, bool delete, float delay, string text)
     {
-        var printDelay = delay == -1 ? _clip.length : delay;
+        var voices = GetVoices(voice);
         _isPlaying = true;
         _text.text = "";
         foreach (char c in text)
         {
-
+            var printDelay = delay;
+            if (voice != Voice.NONE)
+            {
+                var clip = voices[UnityEngine.Random.Range(0, voices.Count)];
+                printDelay = delay == 0 ? clip.length : delay;
+                _source.PlayOneShot(clip);
+            }
             if (!char.IsWhiteSpace(c))
             {
-                //_source.PlayOneShot(_clip);
                 yield return new WaitForSecondsRealtime(printDelay);
             }
-                
+
             _text.text += c;
         }
         yield return new WaitForSecondsRealtime(1f);
         if (delete) _text.text = "";
         _isPlaying = false;
     }
+
+    private List<AudioClip> GetVoices(Voice voice)
+    {
+
+        return voice switch
+        {
+            Voice.PLAYER => _playerVoice,
+            Voice.MONSTER => _monsterVoice,
+            Voice.DOCTOR1 => _doctor1Voice,
+            Voice.DOCTOR2 => _doctor2Voice,
+            _ => new List<AudioClip>(),
+        };
+    }
+}
+
+public enum Voice
+{
+    NONE,
+    PLAYER,
+    MONSTER,
+    DOCTOR1,
+    DOCTOR2
 }

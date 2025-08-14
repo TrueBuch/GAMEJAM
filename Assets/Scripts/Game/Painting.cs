@@ -20,8 +20,6 @@ public class Painting : MonoBehaviour, ISingleton
     public void ChangeState(int state)
     {
         _currentState = state;
-        if (_currentState != 2) _eye.gameObject.SetActive(false);
-        else _eye.gameObject.SetActive(true);
         _image.sprite = _sprites[_currentState];
     }
 }

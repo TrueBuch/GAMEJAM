@@ -49,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -87,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,12 +115,12 @@ TextureImporter:
       name: PAINTING-export_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 55
-        height: 67
+        x: 1
+        y: 1
+        width: 53
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -137,12 +137,12 @@ TextureImporter:
       name: PAINTING-export_1
       rect:
         serializedVersion: 2
-        x: 54
-        y: 0
-        width: 55
-        height: 67
+        x: 55
+        y: 1
+        width: 53
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,12 +159,12 @@ TextureImporter:
       name: PAINTING-export_2
       rect:
         serializedVersion: 2
-        x: 108
-        y: 0
-        width: 55
-        height: 67
+        x: 109
+        y: 1
+        width: 53
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -181,12 +181,12 @@ TextureImporter:
       name: PAINTING-export_3
       rect:
         serializedVersion: 2
-        x: 162
-        y: 45
-        width: 40
-        height: 22
+        x: 163
+        y: 46
+        width: 38
+        height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,15 +200,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PAINTING-export_4
+      name: eye
       rect:
         serializedVersion: 2
-        x: 163
-        y: 11
-        width: 46
-        height: 22
+        x: 164
+        y: 12
+        width: 38
+        height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -221,11 +221,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: eye2
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 15
+        width: 3
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44b9d03967079474fb57f0ad467f68c5
+      internalID: 260350597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f9f6771b2de5f9d4fb7d277d33ebec6a
     internalID: 0
     vertices: []
     indices: 
@@ -239,7 +261,8 @@ TextureImporter:
       PAINTING-export_1: 6653608346967868374
       PAINTING-export_2: -3654751583505096549
       PAINTING-export_3: -2683075236268140188
-      PAINTING-export_4: -8792778461202370126
+      eye: -8792778461202370126
+      eye2: 260350597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

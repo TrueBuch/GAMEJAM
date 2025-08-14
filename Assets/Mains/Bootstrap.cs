@@ -25,7 +25,7 @@ public class Bootstrap : MonoBehaviour
     private IEnumerator Hello()
     {
         var subs = Main.Get<Subtitles>();
-        subs.Type(false, "Игра сделана за 7 дней\n для геймджема от MyIndie\n\n by TrueBuch & Bruhman");
+        subs.Type(Voice.NONE, false, "Игра сделана за 7 дней\n для геймджема от MyIndie\n\n by TrueBuch & Bruhman");
         yield return new WaitUntil(() => !subs.IsPlaying);
         yield return new WaitForSecondsRealtime(1f);
         Main.SceneTransition.SwitchToScene("Menu");

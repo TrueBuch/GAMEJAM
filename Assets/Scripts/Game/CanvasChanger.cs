@@ -74,7 +74,15 @@ public class CanvasChanger : MonoBehaviour, ISingleton
         nextCanvas.transform.localPosition = startPos;
         _currentIndex = next;
         _isPlaying = false;
+
+        var events = Main.EventSystem.FindAll<IOnCanvasChanged>();
+        foreach (var e in events) StartCoroutine(e.OnChanged(_currentIndex));
     }
 
-    public void Initialize() {}
+    public void Initialize() { }
+}
+
+public interface IOnCanvasChanged
+{
+    public IEnumerator OnChanged(int index);
 }

@@ -9,6 +9,7 @@ public class Clock : MonoBehaviour, ISingleton
     [SerializeField] private Image _image;
     [SerializeField] private List<Sprite> _sprites;
     private int _index;
+    public int Index => _index;
 
     private IEnumerator ClockAnim()
     {
