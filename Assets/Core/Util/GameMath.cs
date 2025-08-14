@@ -28,10 +28,14 @@ namespace Util
             else return direction.z > 0 ? Vector3.forward : Vector3.back;
         }
 
-        
         public static float GetPercent(float value, float min, float max)
         {
             return (value - min) / (max - min);
+        }
+
+        public static Vector2 DirectionToPoint(Vector2 start, Vector2 end)
+        {
+            return (end - start).normalized;
         }
 
     }

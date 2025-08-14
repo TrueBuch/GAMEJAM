@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 9b41f526fddf447448c2cb8d8ab38657
+guid: 7f876f92533a5fa4dacce3708a33ef13
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6914607946322515741
-    second: WALLPAPERS_0
+      213: 8358656148857884908
+    second: WALLPAPERS-export_0
   - first:
-      213: 3583502439703042707
-    second: WALLPAPERS_1
+      213: 1528949596632937683
+    second: WALLPAPERS-export_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -118,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3e86a5e35b06a00a0800000000000000
-      internalID: -6914607946322515741
+      spriteID: ce01f483b79eff370800000000000000
+      internalID: 8358656148857884908
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 39ade329b782bb130800000000000000
-      internalID: 3583502439703042707
+      spriteID: 3d478c2be8be73510800000000000000
+      internalID: 1528949596632937683
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: edec52daa5bcce54f884dfe9f5a3b15c
+    spriteID: af24b99793b8f6847af64d0d96b746dd
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WALLPAPERS_0: -6914607946322515741
-      WALLPAPERS_1: 3583502439703042707
+      WALLPAPERS_0: 8358656148857884908
+      WALLPAPERS_1: 1528949596632937683
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

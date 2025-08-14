@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: 0b508c959db59f74b9f671cba79ed267
+guid: 1128c3ca5001c2e42b8f71943139e006
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2932971626054911752
-    second: CHAIR_0
+      213: -6683608280976314356
+    second: PAINTING-export_0
   - first:
-      213: -7292513773565075923
-    second: CHAIR_1
+      213: 6653608346967868374
+    second: PAINTING-export_1
+  - first:
+      213: -3654751583505096549
+    second: PAINTING-export_2
+  - first:
+      213: -2683075236268140188
+    second: PAINTING-export_3
+  - first:
+      213: -8792778461202370126
+    second: PAINTING-export_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -78,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,45 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CHAIR_0
+      name: PAINTING-export_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 73
+        width: 55
+        height: 67
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8078d43872204b820800000000000000
-      internalID: 2932971626054911752
+      spriteID: c003c820ead0f33a0800000000000000
+      internalID: -6683608280976314356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CHAIR_1
+      name: PAINTING-export_1
       rect:
         serializedVersion: 2
-        x: 208
+        x: 54
         y: 0
-        width: 44
-        height: 73
+        width: 55
+        height: 67
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d2e920f3c59cbca90800000000000000
-      internalID: -7292513773565075923
+      spriteID: 6d3089b0a8d565c50800000000000000
+      internalID: 6653608346967868374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PAINTING-export_2
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 55
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b90e1ea6cc6b74dc0800000000000000
+      internalID: -3654751583505096549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PAINTING-export_3
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 45
+        width: 40
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4691794c94dc3cad0800000000000000
+      internalID: -2683075236268140188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PAINTING-export_4
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 11
+        width: 46
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b1b35f5396c9f580800000000000000
+      internalID: -8792778461202370126
       vertices: []
       indices: 
       edges: []
@@ -150,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cf492470be637bf4293b7fa72fa14057
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CHAIR_0: 2932971626054911752
-      CHAIR_1: -7292513773565075923
+      PAINTING-export_0: -6683608280976314356
+      PAINTING-export_1: 6653608346967868374
+      PAINTING-export_2: -3654751583505096549
+      PAINTING-export_3: -2683075236268140188
+      PAINTING-export_4: -8792778461202370126
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
