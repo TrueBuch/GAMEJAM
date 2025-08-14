@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class Game : MonoBehaviour, ISingleton
 {
+    public AudioClip windowTuc;
+    public AudioClip windowScary;
+    public AudioSource Source;
     public bool FMEvent = false;
     public int ListenCount = 0;
     public bool MonsterSays = false;
+    public AudioClip FinalNoise;
 
     public void Initialize()
     {
@@ -17,7 +21,7 @@ public class Game : MonoBehaviour, ISingleton
         Debug.Log("Game Started");
         var events = Main.EventSystem.FindAll<IOnGameStarted>();
         foreach (var e in events) StartCoroutine(e.OnStarted());
-        StartEnding(true);
+        //StartEnding(false);
     }
 
     public void CheckListenCount()
@@ -30,6 +34,8 @@ public class Game : MonoBehaviour, ISingleton
 
     public void StartEnding(bool isFirst)
     {
+        Main.Get<Radio>().Change(false);
+        Main.Get<Clock>().gameObject.SetActive(false);
         Main.Get<Ending>().StarEndind(isFirst);
     }
 }
@@ -544,9 +550,10 @@ public class Listen666Wave : Event, IOnClipChanged, IOnGameStarted
         if (!radio.IsCurrent("devil")) yield break;
         if (!Main.Get<Window>().CodeViewed) yield break;
         _invoked = true;
+        yield return new WaitForSecondsRealtime(6f);
         Main.Get<Book>().ChangeState(false);
         var subs = Main.Get<Subtitles>();
-
+        yield return new WaitForSecondsRealtime(2f);
         subs.TypeByKey(Voice.PLAYER, true, "looked_at_nnm");
     }
 }
@@ -696,7 +703,54 @@ public class ListenMinus13Wave : Event, IOnClipChanged, IOnGameStarted
         yield break;
     }
 
-    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip) { yield break; }
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
+    {
+        if (_invoked) yield break;
+        if (newClip == null) yield break;
+        var radio = Main.Get<Radio>();
+        var subs = Main.Get<Subtitles>();
+
+        if (!Main.Get<Radio>().IsCurrent("minus_wave")) yield break;
+        _invoked = true;
+
+        yield return new WaitForSecondsRealtime(4f);
+
+        subs.TypeByKey(Voice.MONSTER, true, "ending_2_found");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.MONSTER, true, "ending_2_found");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        yield return new WaitForSecondsRealtime(1f);
+        Main.Get<Game>().Source.panStereo = Main.Get<CanvasChanger>().GetPanStereo(0);
+        Main.Get<Game>().Source.PlayOneShot(Main.Get<Game>().windowScary);
+        Main.Get<Window>().StartScary();
+    }
+}
+
+public class ScaryWindowViewed : Event, IOnCanvasChanged, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnChanged(int index)
+    {
+        if (_invoked) yield break;
+        if (index != 0) yield break;
+        if (!Main.Get<Window>().IsScary) yield break;
+
+        var radio = Main.Get<Radio>();
+        var subs = Main.Get<Subtitles>();
+
+        _invoked = true;
+        subs.TypeByKey(Voice.MONSTER, true, "ending_2_flash");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+
+        yield return new WaitForSecondsRealtime(4f);
+        Main.Get<Game>().StartEnding(false);
+    }
 }
 
 public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
@@ -716,6 +770,9 @@ public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
         var subs = Main.Get<Subtitles>();
         Main.Get<Window>().ViewCode();
         Main.Get<Radio>().SetEnable("AM", "devil", true);
+        Main.Get<Game>().Source.panStereo = Main.Get<CanvasChanger>().GetPanStereo(0);
+        Main.Get<Game>().Source.PlayOneShot(Main.Get<Game>().windowTuc);
+        yield return new WaitForSecondsRealtime(1f);
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window");
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window_1");

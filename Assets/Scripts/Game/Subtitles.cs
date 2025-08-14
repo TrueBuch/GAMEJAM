@@ -62,6 +62,19 @@ public class Subtitles : MonoBehaviour, ISingleton
         var voices = GetVoices(voice);
         _isPlaying = true;
         _text.text = "";
+
+        string colorHex = voice switch
+        {
+            Voice.MONSTER => "#6F2929",  
+            Voice.SPEC => "#6F2929",     
+            Voice.PLAYER => "#B59E90",   
+            Voice.DOCTOR1 => "#38405D",  
+            Voice.DOCTOR2 => "#4C546D",  
+            _ => "#B59E90",
+        };
+
+        _text.text = $"<color={colorHex}>";
+
         foreach (char c in text)
         {
             var printDelay = delay;
@@ -103,5 +116,6 @@ public enum Voice
     PLAYER,
     MONSTER,
     DOCTOR1,
-    DOCTOR2
+    DOCTOR2,
+    SPEC
 }

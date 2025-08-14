@@ -95,6 +95,20 @@ public class CanvasChanger : MonoBehaviour, ISingleton
             yield return Change(1);
         }
     }
+
+    public float GetPanStereo( int targetIndex)
+    {
+        int diff = (targetIndex - _currentIndex + 4) % 4;
+
+        return diff switch
+        {
+            0 => 0f,   // Front
+            1 => 0.75f,  // Right
+            2 => 0f,   // Back
+            3 => -0.75f,   // Left
+            _ => 0f
+        };
+    }
 }
 
 public interface IOnCanvasChanged
