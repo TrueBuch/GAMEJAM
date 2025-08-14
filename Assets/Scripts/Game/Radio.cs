@@ -221,7 +221,7 @@ public class TagWave : Tag
     [HorizontalGroup(Width = 100)] public List<bool> Enabled = new();
     [HorizontalGroup] public List<string> Keys = new();
     [HorizontalGroup] public List<AudioClip> Clips = new();
-    [MinMaxSlider(nameof(Min), nameof(Max), ShowFields = true)]
+    [MinMaxSlider(-13, nameof(Max), ShowFields = true)]
     [HorizontalGroup] public List<Vector2Int> Ranges = new();
 }
 
