@@ -329,6 +329,31 @@ public class ListenR1Wave : Event, IOnClipChanged, IOnGameStarted
     }
 }
 
+public class Listen666Wave : Event, IOnClipChanged, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
+    {
+        Debug.Log("listen 666 1");
+        if (_invoked) yield break;
+        var radio = Main.Get<Radio>();
+        if (newClip == null) yield break;
+        Debug.Log("listen 666 2");
+        if (!radio.IsCurrent("devil")) yield break;
+        Debug.Log("listen 666 3");
+        if (!Main.Get<Window>().CodeViewed) yield break;
+        Debug.Log("listen 666 Code Viewed");
+        _invoked = true;
+        Main.Get<Book>().ChangeState(false);
+    }
+}
+
 public class FirstDon : Event, IOnDonChanged
 {
     public IEnumerator OnChanged(int value)
@@ -380,7 +405,7 @@ public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
 
         var subs = Main.Get<Subtitles>();
         Main.Get<Window>().ViewCode();
-
+        Main.Get <Radio>().SetEnable("AM", "devil", true);
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window");
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window_1");
