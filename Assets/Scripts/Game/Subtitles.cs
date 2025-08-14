@@ -78,7 +78,7 @@ public class Subtitles : MonoBehaviour, ISingleton
 
             _text.text += c;
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(2f);
         if (delete) _text.text = "";
         _isPlaying = false;
     }

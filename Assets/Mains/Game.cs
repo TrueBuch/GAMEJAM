@@ -61,21 +61,6 @@ public class Enable102Wave : Event, IOnPageChanged, IOnGameStarted
 
 }
 
-// public class WindowAndCode : Event, IOnFMEventCompleted, IOnGameStarted
-// {
-//     private bool _invoked = false;
-//     public IEnumerator OnStarted()
-//     {
-//         _invoked = false;
-//         yield break;
-//     }
-
-//     public IEnumerator OnCompleted()
-//     {
-//         throw new System.NotImplementedException();
-//     }
-// }
-
 public interface IOnFMEventCompleted
 {
     public IEnumerator OnCompleted();
@@ -174,7 +159,7 @@ public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
         yield return new WaitForSecondsRealtime(5f);
         subs.TypeByKey(Voice.PLAYER, true, "cosmos");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        Main.Get<Clock>().ChangeDon();
+        Main.Get<Clock>().ChangeDon(1);
     }
 }
 
@@ -240,7 +225,7 @@ public class OBERNIS : Event, IOnNotebookUp, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "looked_at_notebook_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        Main.Get<Clock>().ChangeDon();
+        Main.Get<Clock>().ChangeDon(2);
     }
 }
 
@@ -340,53 +325,106 @@ public class Listen666Wave : Event, IOnClipChanged, IOnGameStarted
 
     public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
     {
-        Debug.Log("listen 666 1");
         if (_invoked) yield break;
         var radio = Main.Get<Radio>();
         if (newClip == null) yield break;
-        Debug.Log("listen 666 2");
         if (!radio.IsCurrent("devil")) yield break;
-        Debug.Log("listen 666 3");
         if (!Main.Get<Window>().CodeViewed) yield break;
-        Debug.Log("listen 666 Code Viewed");
         _invoked = true;
         Main.Get<Book>().ChangeState(false);
+        var subs = Main.Get<Subtitles>();
+
+        subs.TypeByKey(Voice.PLAYER, true, "looked_at_nnm");
     }
 }
 
 public class FirstDon : Event, IOnDonChanged
 {
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
     public IEnumerator OnChanged(int value)
     {
         if (value != 1) yield break;
+        _invoked = true;
     }
 }
 
 public class SecondDon : Event, IOnDonChanged
 {
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
     public IEnumerator OnChanged(int value)
     {
         if (value != 2) yield break;
+        _invoked = true;
         Main.Get<Gazeta>().GazetaFull.Change(2);
     }
 }
 
 public class ThirdDon : Event, IOnDonChanged
 {
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
     public IEnumerator OnChanged(int value)
     {
         if (value != 3) yield break;
+        _invoked = true;
         Main.Get<Painting>().ChangeState(2);
         Main.Get<Eye>().On();
     }
 }
 
-public class FourthDon : Event, IOnDonChanged
+public class FourthDon : Event, IOnDonChanged, IOnGameStarted
 {
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
     public IEnumerator OnChanged(int value)
     {
         if (value != 4) yield break;
+        if (_invoked) yield break;
+        _invoked = true;
+        yield return new WaitForSecondsRealtime(8f);
+        var subs = Main.Get<Subtitles>();
+        subs.TypeByKey(Voice.MONSTER, true, "last_din");
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.TypeByKey(Voice.MONSTER, true, "last_din_1");
+        Main.Get<Radio>().State.Waves["SW"].Min = -13;
+        Main.Get<Radio>().SetEnable("SW", "minus_wave", true);
+        yield return new WaitUntil(() => !subs.IsPlaying);
+        
     }
+}
+
+public class ListenMinus13Wave : Event, IOnClipChanged, IOnGameStarted
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip) { yield break; }
 }
 
 public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
@@ -405,10 +443,11 @@ public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
 
         var subs = Main.Get<Subtitles>();
         Main.Get<Window>().ViewCode();
-        Main.Get <Radio>().SetEnable("AM", "devil", true);
+        Main.Get<Radio>().SetEnable("AM", "devil", true);
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window");
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "knock_on_the_window_1");
+        Main.Get<Chair>().ChangeState(false);
     }
 }
 
@@ -427,10 +466,77 @@ public class OnCodeSee : Event, IOnCanvasChanged, IOnGameStarted
         if (index != 0) yield break;
         if (!Main.Get<Window>().CodeViewed) yield break;
         _invoked = true;
+        Main.Get<Clock>().ChangeDon(3);
         var subs = Main.Get<Subtitles>();
         subs.TypeByKey(Voice.PLAYER, true, "looked_at_window");
         Main.Get<Painting>().ChangeState(2);
         Main.Get<Eye>().On();
+    }
+}
+
+public class DevilBookOpened : Event, IOnGameStarted, IOnPageChanged
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnChanged(int index)
+    {
+        if (_invoked) yield break;
+        if (Main.Get<Book>().IsNormal) yield break;
+        _invoked = true;
+        Main.Get<Radio>().SetEnable("SW", "devil_clip", true);
+    }
+}
+
+public class SW13Listened : Event, IOnGameStarted, IOnClipChanged
+{
+    private bool _invoked = false;
+    public IEnumerator OnStarted()
+    {
+        _invoked = false;
+        yield break;
+    }
+
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
+    {
+        if (_invoked) yield break;
+        var radio = Main.Get<Radio>();
+        if (newClip == null) yield break;
+        if (!radio.IsCurrent("devil_clip")) yield break;
+        _invoked = true;
+        var subs = Main.Get<Subtitles>();
+        yield return new WaitForSecondsRealtime(5f);
+        subs.TypeByKey(Voice.PLAYER, true, "found_code_in_nnm");
+        yield return new WaitForSecondsRealtime(15f);
+
+        Main.Get<Clock>().ChangeDon(4);
+    }
+}
+
+public class NormalChairClicked : Event, IOnChairClicked
+{
+    public IEnumerator OnClicked(bool IsNormal)
+    {
+        if (!IsNormal) yield break;
+
+        var subs = Main.Get<Subtitles>();
+        subs.Type(Voice.PLAYER, true, "Классный стул");
+    }
+}
+
+public class NeNormalChairClicked : Event, IOnChairClicked
+{
+    public IEnumerator OnClicked(bool IsNormal)
+    {
+        if (IsNormal) yield break;
+        if (Main.Get<Clock>().Index == 4) yield break; 
+
+        var subs = Main.Get<Subtitles>();
+        subs.Type(Voice.PLAYER, true, "Но как оно там оказалось?");
     }
 }
 

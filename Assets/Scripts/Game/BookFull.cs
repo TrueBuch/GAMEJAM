@@ -43,6 +43,8 @@ public class BookFull : MonoBehaviour
         _isOpened = true;
         _image.sprite = _book.IsNormal ? _defaultPages[page] : _nnmPages[page];
         _canvas.transform.DOLocalMove(Vector3.zero, 0.5f);
+        var events = Main.EventSystem.FindAll<IOnPageChanged>();
+        foreach (var e in events) StartCoroutine(e.OnChanged(page));
     }
 
     private void OnLeftButtonClicked()

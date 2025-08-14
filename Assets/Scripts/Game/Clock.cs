@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class Clock : MonoBehaviour, ISingleton
 {
     private int _currentDon;
+    [SerializeField] private AudioSource _source;
+    [SerializeField] private AudioClip _tictac;
+    [SerializeField] private AudioClip _dindon;
     [SerializeField] private Image _image;
     [SerializeField] private List<Sprite> _sprites;
     private int _index;
     public int Index => _index;
 
+    private bool _playDinDon;
     private IEnumerator ClockAnim()
     {
         while (true)
@@ -25,17 +29,42 @@ public class Clock : MonoBehaviour, ISingleton
     private void Start()
     {
         StartCoroutine(ClockAnim());
+        StartCoroutine(ClockSound());
     }
 
-    public void ChangeDon()
+    public void ChangeDon(int index)
     {
-        _currentDon++;
+        _currentDon = index;
         var events = Main.EventSystem.FindAll<IOnDonChanged>();
+        PlayDindon();
         Debug.Log($"Don changed - {_currentDon}");
         foreach (var e in events) StartCoroutine(e.OnChanged(_currentDon));
     }
 
     public void Initialize() { }
+
+    private IEnumerator ClockSound()
+    {
+        while (true)
+        {
+            _source.clip = _tictac;
+            _source.Play();
+            yield return new WaitForSecondsRealtime(_tictac.length);
+
+            if (_playDinDon)
+            {
+                _playDinDon = false;
+                _source.clip = _dindon;
+                _source.Play();
+                yield return new WaitForSecondsRealtime(_dindon.length);
+            }
+        }
+    }
+
+    public void PlayDindon()
+    {
+        _playDinDon = true;
+    }
 }
 
 public interface IOnDonChanged
