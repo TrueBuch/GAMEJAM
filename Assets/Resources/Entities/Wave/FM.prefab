@@ -64,16 +64,16 @@ MonoBehaviour:
         - R3_noise
         - R1_noise
         - R2_noise
-        - startMorse
+        - start_morse
         Clips:
-        - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
+        - {fileID: 8300000, guid: f9efdb855e9893e4182275d47c4b8c18, type: 3}
         - {fileID: 8300000, guid: d2e0e25d1d2b07e4a9f92bddc2d50c35, type: 3}
         - {fileID: 8300000, guid: 96e971a3f67db1a469bd4a35c0c30ec4, type: 3}
         - {fileID: 8300000, guid: c9fe906c2d2c383499b149dd3be18628, type: 3}
         - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
         - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
         - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
-        - {fileID: 0}
+        - {fileID: 8300000, guid: 90153ad723b840049afc0c0f427c5106, type: 3}
         Ranges:
         - {x: 102, y: 106}
         - {x: 96, y: 100}

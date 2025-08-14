@@ -7,7 +7,6 @@ public class Bootstrap : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(PreloadClips());
         StartCoroutine(Hello());
     }
 
@@ -18,16 +17,17 @@ public class Bootstrap : MonoBehaviour
         foreach (var clip in _clips)
         {
             AudioSource.PlayClipAtPoint(clip, Vector3.zero, 0f);
-            yield return null;
         }
+        yield return null;
     }
 
     private IEnumerator Hello()
     {
         var subs = Main.Get<Subtitles>();
-        subs.Type(Voice.NONE, false, "Игра сделана за 7 дней\n для геймджема от MyIndie\n\n by TrueBuch & Bruhman");
+        subs.Type(Voice.NONE, false, 0.05f, "Игра сделана за 7 дней\n для геймджема от MyIndie\n\n by TrueBuch & Bruhman");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        yield return new WaitForSecondsRealtime(1f);
+        StartCoroutine(PreloadClips());
+        yield return new WaitForSecondsRealtime(2f);
         Main.SceneTransition.SwitchToScene("Menu");
     }
         
