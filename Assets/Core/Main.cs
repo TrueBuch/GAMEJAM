@@ -36,7 +36,7 @@ public class Main : MonoBehaviour
     private static void Initiallize()
     {
         if (!PlayerPrefs.HasKey("volume")) PlayerPrefs.SetFloat("volume", 0.5f);
-
+        if (!PlayerPrefs.HasKey("fullscreen")) PlayerPrefs.SetInt("fullscreen", Screen.fullScreen ? 1 : 0);
         Instance = null;
 
         DOTween.SetTweensCapacity(1000, 200);

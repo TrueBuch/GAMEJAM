@@ -55,19 +55,28 @@ MonoBehaviour:
       data:
         Min: 88
         Max: 108
-        Enabled: 00010101
+        Enabled: 00010100000000
         Keys:
         - start
         - R2
         - R1
         - R3
+        - R3_noise
+        - R1_noise
+        - R2_noise
         Clips:
         - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
         - {fileID: 8300000, guid: 0242d28a0f55c4047b9f92da563058db, type: 3}
         - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
-        - {fileID: 0}
+        - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
+        - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
+        - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
+        - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
         Ranges:
         - {x: 102, y: 106}
         - {x: 96, y: 100}
         - {x: 90, y: 94}
         - {x: 102, y: 106}
+        - {x: 101, y: 106}
+        - {x: 90, y: 94}
+        - {x: 96, y: 100}

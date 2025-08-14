@@ -32,6 +32,8 @@ public class GazetaFull : MonoBehaviour
     {
         _isOpened = true;
         _canvas.transform.DOLocalMove(Vector3.zero, 0.5f);
+        var events = Main.EventSystem.FindAll<IOnGazetaOpened>();
+        foreach (var e in events) _gazeta.StartCoroutine(e.OnOpened(_index));
     }
     public void OnRightClickStarted()
     {
@@ -48,8 +50,6 @@ public class GazetaFull : MonoBehaviour
     {
         _index = index;
         _image.sprite = _sprites[index];
-        var events = Main.EventSystem.FindAll<IOnGazetaOpened>();
-        foreach (var e in events) _gazeta.StartCoroutine(e.OnOpened(_index));
     }
 }
 

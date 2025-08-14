@@ -56,10 +56,10 @@
     <Compile Include="Assets\Core\Components\Selectable.cs" />
     <Compile Include="Assets\Scripts\Game\Painting.cs" />
     <Compile Include="Assets\Scripts\Game\Tuning.cs" />
+    <Compile Include="Assets\Scripts\Game\Window.cs" />
     <Compile Include="Assets\Core\Main.cs" />
     <Compile Include="Assets\Mains\Menu.cs" />
     <Compile Include="Assets\Core\Input\PlayerInput.cs" />
-    <Compile Include="Assets\Scripts\Game\Windows.cs" />
     <Compile Include="Assets\Core\Util\GameMath.cs" />
     <Compile Include="Assets\Core\GameConfig.cs" />
     <Compile Include="Assets\Scripts\Game\Book.cs" />

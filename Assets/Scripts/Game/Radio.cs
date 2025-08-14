@@ -146,7 +146,6 @@ public class Radio : MonoBehaviour, ISingleton
             }
 
             _radio.Play();
-
             if (SceneManager.GetActiveScene().name == "Main")
             {
                 var events = Main.EventSystem.FindAll<IOnClipChanged>();
@@ -197,7 +196,6 @@ public class Radio : MonoBehaviour, ISingleton
         var index = wave.Clips.IndexOf(_radio.clip);
         if (index < 0 || index >= wave.Keys.Count) return false;
 
-        if (name == wave.Keys[index]) Debug.Log($"{name}");
         return name == wave.Keys[index];
     }
 
@@ -205,6 +203,8 @@ public class Radio : MonoBehaviour, ISingleton
     {
         var wave = Wave(waveName);
         wave.Enabled[wave.entity.Get<TagWave>().Keys.IndexOf(name)] = bol;
+        if (bol) Debug.Log($"{name} - enabled");
+        else Debug.Log($"{name} - disabled");
         ChangeClip();
     }
 

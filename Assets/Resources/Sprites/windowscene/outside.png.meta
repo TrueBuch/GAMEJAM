@@ -137,9 +137,9 @@ TextureImporter:
       name: outside_1
       rect:
         serializedVersion: 2
-        x: 320
+        x: 321
         y: 0
-        width: 322
+        width: 320
         height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -159,9 +159,9 @@ TextureImporter:
       name: outside_2
       rect:
         serializedVersion: 2
-        x: 641
+        x: 642
         y: 0
-        width: 322
+        width: 320
         height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -181,9 +181,9 @@ TextureImporter:
       name: outside_3
       rect:
         serializedVersion: 2
-        x: 962
+        x: 963
         y: 0
-        width: 322
+        width: 320
         height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -203,9 +203,9 @@ TextureImporter:
       name: outside_4
       rect:
         serializedVersion: 2
-        x: 1283
+        x: 1284
         y: 0
-        width: 321
+        width: 320
         height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
