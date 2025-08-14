@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
-using UnityEngine.Localization.SmartFormat.Utilities;
 
 public class Game : MonoBehaviour, ISingleton
 {
@@ -20,6 +17,7 @@ public class Game : MonoBehaviour, ISingleton
         Debug.Log("Game Started");
         var events = Main.EventSystem.FindAll<IOnGameStarted>();
         foreach (var e in events) StartCoroutine(e.OnStarted());
+        StartEnding(true);
     }
 
     public void CheckListenCount()
@@ -116,16 +114,52 @@ public class OnListenStartMorse : Event, IOnClipChanged
             IsPlaying = true;
             var subs = Main.Get<Subtitles>();
             subs.Type(Voice.NONE, false, 0.25f, "--.");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("start_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, ".-");
+            
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("start_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "--..");
+            
             yield return new WaitForSecondsRealtime(2f);
             subs.Type(Voice.NONE, false, 0.25f, ".");
+            if (!Main.Get<Radio>().IsCurrent("start_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("start_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "-");
+            
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("start_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, true, 0.25f, ".-");
+            if (!Main.Get<Radio>().IsCurrent("start_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
+            IsPlaying = false;
+            Main.Get<Game>().StartCoroutine(OnChanged(oldClip, newClip));
             IsPlaying = false;
         }
 
@@ -176,7 +210,7 @@ public class OnGlitchedGazetaOpened : Event, IOnGazetaOpened, IOnGameStarted
     }
 }
 
-public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
+public class Listen990Wave : Event, IOnClipChanged
 {
     //.---- ----. -.- --- ... -- --- ...
     private bool IsPlaying = false;
@@ -198,22 +232,70 @@ public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
         if (!IsPlaying)
         {
             IsPlaying = true;
+
             subs.Type(Voice.NONE, false, 0.25f, ".----");
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "----.");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "-.-");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "---");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "...");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, true, 0.25f, "--");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, true, 0.25f, "---");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, true, 0.25f, "...");
+            if (!Main.Get<Radio>().IsCurrent("cosmos"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             IsPlaying = false;
+            Main.Get<Game>().StartCoroutine(OnChanged(oldClip, newClip));
         }
 
 
@@ -280,19 +362,62 @@ public class Sw18MorzeListen : Event, IOnClipChanged
         {
             IsPlaying = true;
             subs.Type(Voice.NONE, false, 0.25f, "-...");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, ".-..");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "---");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "-.-");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, false, 0.25f, "-.");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             subs.Type(Voice.NONE, true, 0.25f, "---");
+
             yield return new WaitForSecondsRealtime(2f);
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
+
             subs.Type(Voice.NONE, true, 0.25f, "-");
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            {
+                IsPlaying = false;
+                yield break;
+            }
             IsPlaying = false;
+            Main.Get<Game>().StartCoroutine(OnChanged(oldClip, newClip));
         }
 
         Main.Get<Notebook>().notebook = true;

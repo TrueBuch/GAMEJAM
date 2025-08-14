@@ -8,6 +8,6 @@ public static class Locale
         if (stringTable == null) return $"null : {table}";
             
         var entry = stringTable.GetEntry(key);
-        return entry?.GetLocalizedString() ?? $"null : {key}>";
+        return entry?.GetLocalizedString() ?? $"null : {key}";
     }
 }

@@ -51,13 +51,13 @@ public class Ending : MonoBehaviour, ISingleton
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.DOCTOR2, true, "ending_1_2C_2_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        subs.TypeByKey(Voice.DOCTOR1, true, "ending_1_1С_3");
+        subs.TypeByKey(Voice.DOCTOR1, true, "ending_1_1C_3");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        subs.TypeByKey(Voice.DOCTOR1, true, "ending_1_1С_3_1");
+        subs.TypeByKey(Voice.DOCTOR1, true, "ending_1_1C_3_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
 
-
-
+        yield return new WaitForSecondsRealtime(5f);
+        Main.SceneTransition.SwitchToScene("Menu");
     }
 
     public IEnumerator SecondEnding()
@@ -90,7 +90,7 @@ public class Ending : MonoBehaviour, ISingleton
 
     public IEnumerator FadeAnimation()
     {
-
+        _fading.gameObject.SetActive(true);
         Color startColor = _fading.color;
         startColor.a = 0f;
         Color endColor = _fading.color;
