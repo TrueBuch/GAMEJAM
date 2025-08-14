@@ -258,7 +258,8 @@ public class Sw18Listen : Event, IOnClipChanged, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "sound_interrupted_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        radio.SetEnable("SW", "bipbip_code", true);
+        radio.SetEnable("SW", "bipbip_noise", false);
+        radio.SetEnable("SW", "bipbip_morse", true);
 
         
     }
@@ -272,7 +273,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
     {
         if (newClip == null) yield break;
 
-        if (!Main.Get<Radio>().IsCurrent("bipbip_code")) yield break;
+        if (!Main.Get<Radio>().IsCurrent("bipbip_morse")) yield break;
 
         var subs = Main.Get<Subtitles>();
         if (!IsPlaying)
