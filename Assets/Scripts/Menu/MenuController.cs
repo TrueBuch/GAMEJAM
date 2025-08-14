@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Util;
 
 public class MenuController : MonoBehaviour, ISingleton
 {
     private List<IMenu> _menus;
-
     public void Initialize()
     {
+        Main.Get<Input>().EscStarted.AddListener(OnEscStarted);
         _menus = Reflection.FindAllMonoBehaviours<IMenu>();
         foreach (var m in _menus)
         {
@@ -16,6 +17,16 @@ public class MenuController : MonoBehaviour, ISingleton
         HideAll();
     }
 
+    public void OnEscStarted()
+    {
+        if (SceneManager.GetActiveScene().name != "Main")
+        {
+            HideAll();
+            return;
+        }
+
+        ViewMenu<EscapeMenu>();
+    }
     public void ViewMenu<T>() where T : IMenu
     {
         foreach (var menu in _menus)

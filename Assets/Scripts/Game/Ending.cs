@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Ending : MonoBehaviour, ISingleton
 {
+    [SerializeField] private AudioClip PASHALKOCLIP;
     [SerializeField] private Image _flash;
     [SerializeField] private Image _fading;
     [SerializeField] private List<Sprite> _whiteSprites;
     [SerializeField] private List<Sprite> _redSprites;
-
 
     public void Initialize()
     {
@@ -95,7 +95,7 @@ public class Ending : MonoBehaviour, ISingleton
         yield return new WaitUntil(() => !subs.IsPlaying);
         yield return new WaitForSecondsRealtime(2f);
         subs.TypeByKey(Voice.SPEC, true, ".. .--. .- ... .. -... ---  --.. .-  .. --. .-. ..-");
-        
+
 
         yield return new WaitForSecondsRealtime(5f);
         Main.SceneTransition.SwitchToScene("Menu");
@@ -143,5 +143,25 @@ public class Ending : MonoBehaviour, ISingleton
         }
 
         _fading.color = endColor;
+    }
+
+    public void PASHALKO()
+    {
+        Main.Get<Radio>().Change(false);
+        Main.Get<Clock>().gameObject.SetActive(false);
+        StartCoroutine(PASHALKOANIM());
+    }
+    public IEnumerator PASHALKOANIM()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        yield return StartCoroutine(FlashAnimation(true));
+
+        yield return new WaitForSecondsRealtime(1f);
+        yield return StartCoroutine(FadeAnimation());
+
+        Main.Get<Game>().Source.volume = 0.25f;
+        Main.Get<Game>().Source.PlayOneShot(PASHALKOCLIP);
+        yield return new WaitForSecondsRealtime(60f);
+        Main.SceneTransition.SwitchToScene("Menu");
     }
 }

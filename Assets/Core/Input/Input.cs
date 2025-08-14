@@ -12,6 +12,10 @@ public class Input : MonoBehaviour, ISingleton
     public readonly UnityEvent RightClickPressed = new();
     public readonly UnityEvent RightClickCancelled = new();
 
+    public readonly UnityEvent EscStarted = new();
+    public readonly UnityEvent EscPressed = new();
+    public readonly UnityEvent EscCancelled = new();
+
     public readonly UnityEvent ReloadPerformed = new();
 
     private Vector2 _scroll;
@@ -34,6 +38,10 @@ public class Input : MonoBehaviour, ISingleton
         _playerInput.Player.RightClick.canceled += ctx => RightClickCancelled.Invoke();
 
         _playerInput.Player.Reload.performed += ctx => ReloadPerformed.Invoke();
+
+        _playerInput.Player.Esc.started += ctx => EscStarted.Invoke();
+        _playerInput.Player.Esc.performed += ctx => EscPressed.Invoke();
+        _playerInput.Player.Esc.canceled += ctx => EscCancelled.Invoke();
     }
 
     public void Initialize()
@@ -59,6 +67,10 @@ public class Input : MonoBehaviour, ISingleton
 
         _playerInput.Player.RightClick.started -= ctx => RightClickStarted?.Invoke();
         _playerInput.Player.RightClick.canceled -= ctx => RightClickCancelled?.Invoke();
+
+        _playerInput.Player.Esc.started -= ctx => EscStarted.Invoke();
+        _playerInput.Player.Esc.performed -= ctx => EscPressed.Invoke();
+        _playerInput.Player.Esc.canceled -= ctx => EscCancelled.Invoke();
 
         _playerInput.Disable();
     }
