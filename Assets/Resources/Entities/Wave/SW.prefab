@@ -55,19 +55,22 @@ MonoBehaviour:
       data:
         Min: 3
         Max: 30
-        Enabled: 00000000
+        Enabled: 0000000000
         Keys:
         - bipbip
         - devil_clip
-        - bipbip_code
+        - bipbip_noise
         - minus_wave
+        - bipbip_morse
         Clips:
-        - {fileID: 8300000, guid: 8715ef8a8c390ba4f83961a56e9b3d20, type: 3}
+        - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
         - {fileID: 8300000, guid: 96e971a3f67db1a469bd4a35c0c30ec4, type: 3}
-        - {fileID: 8300000, guid: 0242d28a0f55c4047b9f92da563058db, type: 3}
+        - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
         - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
+        - {fileID: 8300000, guid: f9efdb855e9893e4182275d47c4b8c18, type: 3}
         Ranges:
         - {x: 18, y: 20}
         - {x: 13, y: 13}
         - {x: 18, y: 20}
         - {x: -13, y: -13}
+        - {x: 18, y: 20}
