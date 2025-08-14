@@ -58,7 +58,6 @@ public class Ending : MonoBehaviour, ISingleton
 
         yield return new WaitForSecondsRealtime(5f);
         Main.SceneTransition.SwitchToScene("Menu");
-
     }
 
     public IEnumerator SecondEnding()

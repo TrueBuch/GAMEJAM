@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +17,7 @@ public class Game : MonoBehaviour, ISingleton
         Debug.Log("Game Started");
         var events = Main.EventSystem.FindAll<IOnGameStarted>();
         foreach (var e in events) StartCoroutine(e.OnStarted());
+        StartEnding(true);
     }
 
     public void CheckListenCount()
