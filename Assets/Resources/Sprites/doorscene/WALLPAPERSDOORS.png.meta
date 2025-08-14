@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: a961170063f1fd543b543e819199dd74
+guid: 042dbeb87ffa0854798b5a472ab884f6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8981660188123139263
-    second: WALLPAPERSDOORS_0
+      213: 6331080243356969854
+    second: WALLPAPERSDOORS-export_0
   - first:
-      213: -8758630067055705406
-    second: WALLPAPERSDOORS_1
+      213: 2371419040029763121
+    second: WALLPAPERSDOORS-export_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -118,8 +118,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 143f6a155abba5380800000000000000
-      internalID: -8981660188123139263
+      spriteID: e7b29c510f38cd750800000000000000
+      internalID: 6331080243356969854
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c2c616fb58137680800000000000000
-      internalID: -8758630067055705406
+      spriteID: 13662967d09f8e020800000000000000
+      internalID: 2371419040029763121
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1d5529d20a0c7e94a8f47727dd770c68
+    spriteID: 97aae2c78ea4c754c9c50590ffe9eec1
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WALLPAPERSDOORS_0: -8981660188123139263
-      WALLPAPERSDOORS_1: -8758630067055705406
+      WALLPAPERSDOORS_0: 6331080243356969854
+      WALLPAPERSDOORS_1: 2371419040029763121
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

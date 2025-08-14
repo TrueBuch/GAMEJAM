@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 0b508c959db59f74b9f671cba79ed267
+guid: d3764d9fc048d5f44ac6479c62f179a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2932971626054911752
-    second: CHAIR_0
-  - first:
-      213: -7292513773565075923
-    second: CHAIR_1
+      213: 6669431209764484661
+    second: WALLPAPERScruglikt_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CHAIR_0
+      name: WALLPAPERScruglikt_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 44
-        height: 73
+        width: 10
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8078d43872204b820800000000000000
-      internalID: 2932971626054911752
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CHAIR_1
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 0
-        width: 44
-        height: 73
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d2e920f3c59cbca90800000000000000
-      internalID: -7292513773565075923
+      spriteID: 5367aef59549e8c50800000000000000
+      internalID: 6669431209764484661
       vertices: []
       indices: 
       edges: []
@@ -150,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cf492470be637bf4293b7fa72fa14057
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CHAIR_0: 2932971626054911752
-      CHAIR_1: -7292513773565075923
+      WALLPAPERScruglikt_0: 6669431209764484661
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
