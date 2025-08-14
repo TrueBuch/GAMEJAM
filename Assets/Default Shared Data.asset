@@ -31,10 +31,6 @@ MonoBehaviour:
     m_Key: not_find_1
     m_Metadata:
       m_Items: []
-  - m_Id: 624755743371264
-    m_Key: cosmos
-    m_Metadata:
-      m_Items: []
   - m_Id: 615659048775680
     m_Key: interrupted_signal
     m_Metadata:
