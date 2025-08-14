@@ -60,7 +60,7 @@ MonoBehaviour:
         - cosmos
         - devil
         Clips:
-        - {fileID: 8300000, guid: 8c6ac82c34116f34290daf1bc482433b, type: 3}
+        - {fileID: 8300000, guid: cb76c9336097e1843b3a5869fcfe0b28, type: 3}
         - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
         Ranges:
         - {x: 990, y: 1095}

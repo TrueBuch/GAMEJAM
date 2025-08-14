@@ -163,6 +163,7 @@ public class OnGlitchedGazetaOpened : Event, IOnGazetaOpened, IOnGameStarted
 
 public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
 {
+    //.---- ----. -.- --- ... -- --- ...
     private bool _invoked = false;
     public IEnumerator OnStarted()
     {
@@ -171,19 +172,32 @@ public class Listen990Wave : Event, IOnGameStarted, IOnClipChanged
     }
     public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
     {
-        if (_invoked) yield break;
+        
         if (newClip == null) yield break;
         if (!Main.Get<Radio>().IsCurrent("cosmos")) yield break;
-
-        _invoked = true;
 
         var radio = Main.Get<Radio>();
         var subs = Main.Get<Subtitles>();
         radio.SetEnable("SW", "bipbip", true);
 
-        yield return new WaitForSecondsRealtime(5f);
-        subs.TypeByKey(Voice.PLAYER, true, "cosmos");
-        yield return new WaitUntil(() => !subs.IsPlaying);
+        subs.Type(Voice.NONE, false, 0.25f, ".----");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "----.");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "-.-");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "---");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "...");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, true, 0.25f, "--");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, true, 0.25f, "---");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, true, 0.25f, "...");
+
+        if (_invoked) yield break;
+        _invoked = true;
         Main.Get<Clock>().ChangeDon(1);
     }
 }
@@ -216,14 +230,43 @@ public class Sw18Listen : Event, IOnClipChanged, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         yield return new WaitForSecondsRealtime(2f);
         radio.SetEnable("SW", "bipbip", false);
-        radio.SetEnable("SW", "bipbip_code", true);
-        Main.Get<Radio>().ChangeClip();
+        radio.SetEnable("SW", "bipbip_noise", true);
         yield return new WaitForSecondsRealtime(1.5f);
 
         subs.TypeByKey(Voice.PLAYER, true, "sound_interrupted");
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.PLAYER, true, "sound_interrupted_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
+        radio.SetEnable("SW", "bipbip_code", true);
+
+        
+    }
+}
+
+public class Sw18MorzeListen : Event, IOnClipChanged
+{
+    //-... .-.. --- -.- -. --- -
+    public IEnumerator OnChanged(AudioClip oldClip, AudioClip newClip)
+    {
+        if (newClip == null) yield break;
+
+        if (!Main.Get<Radio>().IsCurrent("bipbip_code")) yield break;
+
+        var subs = Main.Get<Subtitles>();
+
+        subs.Type(Voice.NONE, false, 0.25f, "-...");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, ".-..");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "---");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "-.-");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, false, 0.25f, "-.");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, true, 0.25f, "---");
+        yield return new WaitForSecondsRealtime(2f);
+        subs.Type(Voice.NONE, true, 0.25f, "-");
 
         Main.Get<Notebook>().notebook = true;
     }
