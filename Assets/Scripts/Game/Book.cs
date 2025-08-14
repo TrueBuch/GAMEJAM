@@ -30,6 +30,7 @@ public class Book : MonoBehaviour, ISingleton
 
     public void ChangeState(bool normal)
     {
+        Debug.Log("book changed");
         _isNormal = normal;
         _bookFull.UpdateView();
         _image.sprite = normal ? _normalSprite : _nnmSprite;

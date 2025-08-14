@@ -44,7 +44,7 @@ public class Subtitles : MonoBehaviour, ISingleton
             StopCoroutine(_coroutine);
             _text.text = "";
         }
-        _coroutine = StartCoroutine(Play(voice, delete, -1, text));
+        _coroutine = StartCoroutine(Play(voice, delete, 0, text));
     }
 
     public void Type(Voice voice, bool delete, float delay, string text)

@@ -191,12 +191,15 @@ public class Radio : MonoBehaviour, ISingleton
 
     public bool IsCurrent(string name)
     {
-        
         var wave = State.CurrentWave.entity.Get<TagWave>();
-        var index = wave.Clips.IndexOf(_radio.clip);
-        if (index < 0 || index >= wave.Keys.Count) return false;
 
-        return name == wave.Keys[index];
+        var enabled = wave.Clips
+            .Select((clip, i) => new { clip, key = wave.Keys[i], enabled = State.CurrentWave.Enabled[i] })
+            .Where(x => x.enabled)
+            .ToList();
+
+        var index = enabled.FindIndex(x => x.clip == _radio.clip);
+        return index != -1 && enabled[index].key == name;
     }
 
     public void SetEnable(string waveName, string name, bool bol)
