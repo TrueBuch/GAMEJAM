@@ -111,7 +111,6 @@ public class Radio : MonoBehaviour, ISingleton
         _radio.Play();
 
         _noise.clip = _state.CurrentWave.entity.Get<TagWave>().Noise;
-        Change(false);
         //StartCoroutine(Shake());
     }
 

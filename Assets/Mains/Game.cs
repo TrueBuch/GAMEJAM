@@ -362,11 +362,12 @@ public class Sw18MorzeListen : Event, IOnClipChanged
         var subs = Main.Get<Subtitles>();
         if (!IsPlaying)
         {
+            if (Main.Get<Notebook>().scary) yield break;
             IsPlaying = true;
             subs.Type(Voice.NONE, true, 0.25f, "[ -...");
 
             yield return new WaitForSecondsRealtime(2f);
-            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse") || (Main.Get<Notebook>().scary))
             {
                 IsPlaying = false;
                 yield break;
@@ -374,7 +375,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
             subs.Type(Voice.NONE, true, 0.25f, ".-..");
 
             yield return new WaitForSecondsRealtime(2f);
-            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse") || (Main.Get<Notebook>().scary))
             {
                 IsPlaying = false;
                 yield break;
@@ -382,7 +383,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
             subs.Type(Voice.NONE, true, 0.25f, "---");
 
             yield return new WaitForSecondsRealtime(2f);
-            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse") || (Main.Get<Notebook>().scary))
             {
                 IsPlaying = false;
                 yield break;
@@ -390,7 +391,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
             subs.Type(Voice.NONE, true, 0.25f, "-.-");
 
             yield return new WaitForSecondsRealtime(2f);
-            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse") || (Main.Get<Notebook>().scary))
             {
                 IsPlaying = false;
                 yield break;
@@ -398,7 +399,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
             subs.Type(Voice.NONE, true, 0.25f, "-.");
 
             yield return new WaitForSecondsRealtime(2f);
-            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse") || (Main.Get<Notebook>().scary))
             {
                 IsPlaying = false;
                 yield break;
@@ -406,7 +407,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
             subs.Type(Voice.NONE, true, 0.25f, "---");
 
             yield return new WaitForSecondsRealtime(2f);
-            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse") || (Main.Get<Notebook>().scary))
             {
                 IsPlaying = false;
                 yield break;
@@ -414,7 +415,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
 
             subs.Type(Voice.NONE, true, 0.25f, "- ]");
             yield return new WaitUntil(() => !subs.IsPlaying);
-            if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
+            if (!Main.Get<Radio>().IsCurrent("bipbip_morse") || (Main.Get<Notebook>().scary))
             {
                 IsPlaying = false;
                 yield break;
@@ -441,7 +442,7 @@ public class OBERNIS : Event, IOnNotebookUp, IOnGameStarted
         if (_invoked) yield break;
         if (!Main.Get<Notebook>().notebook) yield break;
         _invoked = true;
-
+        Main.Get<Notebook>().scary = true;
         var subs = Main.Get<Subtitles>();
         Main.Get<Notebook>().AddText("ОБЕРНИСЬ");
         subs.TypeByKey(Voice.PLAYER, true, "looked_at_notebook");
@@ -552,7 +553,9 @@ public class Listen666Wave : Event, IOnClipChanged, IOnGameStarted
         var radio = Main.Get<Radio>();
         if (newClip == null) yield break;
         if (!radio.IsCurrent("devil")) yield break;
+        Debug.Log("666 open");
         if (!Main.Get<Window>().CodeViewed) yield break;
+        Debug.Log("666 played");
         _invoked = true;
         yield return new WaitForSecondsRealtime(6f);
         Main.Get<Book>().ChangeState(false);
@@ -776,6 +779,7 @@ public class Print666 : Event, IOnGameStarted, IOnFMEventCompleted
         var subs = Main.Get<Subtitles>();
         Main.Get<Window>().ViewCode();
         Main.Get<Radio>().SetEnable("AM", "devil", true);
+        Main.Get<Game>().Source.volume = 0.5f;
         Main.Get<Game>().Source.panStereo = Main.Get<CanvasChanger>().GetPanStereo(0);
         Main.Get<Game>().Source.PlayOneShot(Main.Get<Game>().windowTuc);
         yield return new WaitForSecondsRealtime(1f);
