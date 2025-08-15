@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowTuc: {fileID: 8300000, guid: 5213c4e1f9b547f45b4291a5c083d985, type: 3}
-  windowScary: {fileID: 0}
+  windowScary: {fileID: 8300000, guid: 181b34f7cebb8cc4285315c092b92ab5, type: 3}
   Source: {fileID: 25905955}
   FMEvent: 0
   ListenCount: 0
@@ -4190,7 +4190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerVoice:
-  - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
+  - {fileID: 8300000, guid: bf8e0d708a430c04a8ea04cd8733404c, type: 3}
+  - {fileID: 8300000, guid: d25dd57b70b966344b75f2854affa16e, type: 3}
+  - {fileID: 8300000, guid: e64e47bb0b7681d43aabe21a597150c9, type: 3}
+  - {fileID: 8300000, guid: 010ea7bc50993414c96d5c550ed43f2b, type: 3}
   _monsterVoice:
   - {fileID: 8300000, guid: 0eef7b5ceac229143b18ffb560bd709d, type: 3}
   - {fileID: 8300000, guid: 17715d5fafeebec4dab49b4922553517, type: 3}
@@ -4221,7 +4224,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8740,6 +8743,10 @@ PrefabInstance:
     - target: {fileID: 313182788712478453, guid: 2732bf143171c5e468620b4394aa242b, type: 3}
       propertyPath: m_Volume
       value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 313182788712478453, guid: 2732bf143171c5e468620b4394aa242b, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 938250000582060108, guid: 2732bf143171c5e468620b4394aa242b, type: 3}
       propertyPath: _waves.Array.size

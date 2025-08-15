@@ -175,7 +175,8 @@ public class Radio : MonoBehaviour, ISingleton
         }
 
         _noise.clip = _state.CurrentWave.entity.Get<TagWave>().Noise;
-        _noise.Play();
+        if (IsEnabled) _noise.Play();
+        else _noise.Stop();
         ChangeClip();
     }
 
