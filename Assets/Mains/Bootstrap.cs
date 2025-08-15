@@ -24,7 +24,7 @@ public class Bootstrap : MonoBehaviour
     private IEnumerator Hello()
     {
         var subs = Main.Get<Subtitles>();
-        subs.Type(Voice.NONE, false, 0.05f, "Игра сделана за 7 дней\n для геймджема от MyIndie\n\n by TrueBuch & Bruhman");
+        subs.Type(Voice.NONE, false, 0.05f, "Игра сделана за 7 дней\nдля геймджема от MyIndie\n\n\nby Bruhman & Truebuch\n[ Zvezdnaya 58 Team ]");
         yield return new WaitUntil(() => !subs.IsPlaying);
         StartCoroutine(PreloadClips());
         yield return new WaitForSecondsRealtime(2f);

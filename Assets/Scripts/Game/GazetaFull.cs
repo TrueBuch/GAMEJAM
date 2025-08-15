@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GazetaFull : MonoBehaviour
 {
+    [SerializeField] private AudioClip _sound;
+    [SerializeField] private AudioSource _source;
     [SerializeField] private List<Sprite> _sprites;
     [SerializeField] private Gazeta _gazeta;
     [SerializeField] private Canvas _canvas;
@@ -31,6 +33,7 @@ public class GazetaFull : MonoBehaviour
     public void OnClicked()
     {
         _isOpened = true;
+        _source.PlayOneShot(_sound);
         _canvas.transform.DOLocalMove(Vector3.zero, 0.5f);
         var events = Main.EventSystem.FindAll<IOnGazetaOpened>();
         foreach (var e in events) _gazeta.StartCoroutine(e.OnOpened(_index));
@@ -38,6 +41,7 @@ public class GazetaFull : MonoBehaviour
     public void OnRightClickStarted()
     {
         if (!_isOpened) return;
+        _source.PlayOneShot(_sound);
         _canvas.transform.DOLocalMove(_startedPosition, 0.5f).OnComplete(() =>
         {
             gameObject.SetActive(false);

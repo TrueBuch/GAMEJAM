@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class BookFull : MonoBehaviour
 {
+    [SerializeField] private AudioClip _open;
+    [SerializeField] private AudioClip _close;
+    [SerializeField] private AudioSource _source;
     [SerializeField] private Button _left;
     [SerializeField] private Button _right;
     private Image _image;
@@ -41,6 +44,7 @@ public class BookFull : MonoBehaviour
     public void OnClicked()
     {
         _isOpened = true;
+        _source.PlayOneShot(_open);
         _image.sprite = _book.IsNormal ? _defaultPages[page] : _nnmPages[page];
         _canvas.transform.DOLocalMove(Vector3.zero, 0.5f);
         var events = Main.EventSystem.FindAll<IOnPageChanged>();
@@ -79,6 +83,7 @@ public class BookFull : MonoBehaviour
     public void OnRightClickStarted()
     {
         if (!_isOpened) return;
+        _source.PlayOneShot(_close);
         _canvas.transform.DOLocalMove(_startedPosition, 0.5f).OnComplete(() =>
         {
             gameObject.SetActive(false);
