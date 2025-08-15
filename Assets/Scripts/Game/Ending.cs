@@ -161,7 +161,7 @@ public class Ending : MonoBehaviour, ISingleton
 
         Main.Get<Game>().Source.volume = 0.25f;
         Main.Get<Game>().Source.PlayOneShot(PASHALKOCLIP);
-        yield return new WaitForSecondsRealtime(60f);
+        yield return new WaitForSecondsRealtime(65f);
         Main.SceneTransition.SwitchToScene("Menu");
     }
 }

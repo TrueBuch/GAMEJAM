@@ -26,7 +26,7 @@ public class Lamp : MonoBehaviour
         if (isCanPASHALKO)
         {
             time += Time.deltaTime;
-            if (time > 5)
+            if (time > 10)
             {
                 Debug.Log("isCanPASHALKO removed");
                 isCanPASHALKO = false;

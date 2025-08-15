@@ -56,6 +56,7 @@ public class Radio : MonoBehaviour, ISingleton
     [SerializeField] private List<Sprite> _buttonSprites;
 
     [SerializeField] private AudioSource _noise;
+    [SerializeField] private AudioClip _noiseClip;
 
     private int _dynamicIndex = 0;
     private float _currentTime = 0f;
@@ -78,19 +79,20 @@ public class Radio : MonoBehaviour, ISingleton
         _radio = GetComponent<AudioSource>();
         _radio.loop = true;
         _noise.loop = true;
-        _noise.volume = 0f;
+        _noise.volume = 0.0015f;
         _tuning.ValueChanged.AddListener(ChangeClip);
         _state = new();
     }
 
     private void OnButtonClick()
     {
-        _isEnabled = !_isEnabled;
-        _button.image.sprite = _isEnabled ? _buttonSprites[1] : _buttonSprites[0];
+        Change(!IsEnabled);
     }
 
     public void Change(bool isEnabled)
     {
+        if (isEnabled) _noise.Play();
+        else _noise.Stop();
         _isEnabled = isEnabled;
         _button.image.sprite = _isEnabled ? _buttonSprites[1] : _buttonSprites[0];
     }
@@ -106,8 +108,7 @@ public class Radio : MonoBehaviour, ISingleton
         _radio.volume = 0;
         _radio.Play();
 
-        //_noise.clip = Content.AudioNoise;
-        _noise.Play();
+        _noise.clip = _noiseClip;
 
         //StartCoroutine(Shake());
     }
@@ -197,6 +198,7 @@ public class Radio : MonoBehaviour, ISingleton
 
     public bool IsCurrent(string name)
     {
+        if (!IsEnabled) return false;
         var wave = State.CurrentWave.entity.Get<TagWave>();
 
         var enabled = wave.Clips
