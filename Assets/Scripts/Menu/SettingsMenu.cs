@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour, IMenu
 {
-    [SerializeField] private Toggle _fullscreen;
-    [SerializeField] private Slider _volumeSlider;
-    [SerializeField] private Button _done;
+    [SerializeField] protected Toggle _fullscreen;
+    [SerializeField] protected Slider _volumeSlider;
+    [SerializeField] protected Button _done;
 
     public void Initialize()
     {
@@ -19,13 +19,13 @@ public class SettingsMenu : MonoBehaviour, IMenu
         _fullscreen.isOn = PlayerPrefs.GetInt("fullscreen") == 1;
     }
 
-    private void OnFullsceenChanged(bool isFull)
+    protected void OnFullsceenChanged(bool isFull)
     {
         PlayerPrefs.SetInt("fullscreen", isFull ? 1 : 0);
         Main.ChangeScreen();
     }
 
-    private void OnVolumeChanged(float volume)
+    protected void OnVolumeChanged(float volume)
     {
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("volume", AudioListener.volume);

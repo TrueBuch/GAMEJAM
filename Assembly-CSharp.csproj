@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\Game\Window.cs" />
     <Compile Include="Assets\Core\Main.cs" />
     <Compile Include="Assets\Mains\Menu.cs" />
+    <Compile Include="Assets\Scripts\Menu\Escape.cs" />
     <Compile Include="Assets\Core\Input\PlayerInput.cs" />
     <Compile Include="Assets\Core\Util\GameMath.cs" />
     <Compile Include="Assets\Core\GameConfig.cs" />

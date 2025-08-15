@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.UI;
 
 public class Subtitles : MonoBehaviour, ISingleton
 {
@@ -14,7 +15,8 @@ public class Subtitles : MonoBehaviour, ISingleton
     [SerializeField] private List<AudioClip> _doctor1Voice;
     [SerializeField] private List<AudioClip> _doctor2Voice;
     private AudioSource _source;
-    private TMP_Text _text;
+    [SerializeField] private TMP_Text _text;
+    [SerializeField] private Image _bg;
     private Coroutine _coroutine;
     private bool _isPlaying;
     public bool IsPlaying => _isPlaying;
@@ -22,7 +24,7 @@ public class Subtitles : MonoBehaviour, ISingleton
     private void Awake()
     {
         _source = GetComponent<AudioSource>();
-        _text = GetComponent<TMP_Text>();
+        _bg.gameObject.SetActive(false);
     }
 
     public void TypeByKey(Voice voice, bool delete, string key)
@@ -59,6 +61,7 @@ public class Subtitles : MonoBehaviour, ISingleton
 
     private IEnumerator Play(Voice voice, bool delete, float delay, string text)
     {
+        _bg.gameObject.SetActive(true);
         var voices = GetVoices(voice);
         _isPlaying = true;
         _text.text = "";
@@ -92,7 +95,11 @@ public class Subtitles : MonoBehaviour, ISingleton
             _text.text += c;
         }
         yield return new WaitForSecondsRealtime(2f);
-        if (delete) _text.text = "";
+        if (delete)
+        {
+            _bg.gameObject.SetActive(false);
+            _text.text = "";
+        }
         _isPlaying = false;
     }
 
