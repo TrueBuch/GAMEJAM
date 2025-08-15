@@ -53,6 +53,7 @@ MonoBehaviour:
     - rid: 2684597491175260241
       type: {class: TagWave, ns: , asm: Assembly-CSharp}
       data:
+        Noise: {fileID: 8300000, guid: 7c2a33eb5fcb25741912ba2fd613213e, type: 3}
         Min: 88
         Max: 108
         Enabled: 0001010000000000
@@ -70,9 +71,9 @@ MonoBehaviour:
         - {fileID: 8300000, guid: d2e0e25d1d2b07e4a9f92bddc2d50c35, type: 3}
         - {fileID: 8300000, guid: 96e971a3f67db1a469bd4a35c0c30ec4, type: 3}
         - {fileID: 8300000, guid: c9fe906c2d2c383499b149dd3be18628, type: 3}
-        - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
-        - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
-        - {fileID: 8300000, guid: 9766e2f877de00b409896abeb1a241a4, type: 3}
+        - {fileID: 8300000, guid: 95c56eb23084a5a468e02a18ca89ba57, type: 3}
+        - {fileID: 8300000, guid: 95c56eb23084a5a468e02a18ca89ba57, type: 3}
+        - {fileID: 8300000, guid: 95c56eb23084a5a468e02a18ca89ba57, type: 3}
         - {fileID: 8300000, guid: 90153ad723b840049afc0c0f427c5106, type: 3}
         Ranges:
         - {x: 102, y: 106}
