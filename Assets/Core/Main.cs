@@ -14,6 +14,9 @@ public class Main : MonoBehaviour
     private SceneTransition _sceneTransition;
     public static SceneTransition SceneTransition => Instance._sceneTransition;
 
+    private Cursor _cursor;
+    public static Cursor Cursor => Instance._cursor;
+
     private ECS ecs;
     public static ECS ECS => Instance.ecs;
     
@@ -48,6 +51,7 @@ public class Main : MonoBehaviour
         Instance._gameConfig = Resources.Load<GameConfig>("GameConfig");
         Instance._sceneTransition = Instantiate(Content.SceneTransition).GetComponent<SceneTransition>();
 
+        Instance._cursor = Instantiate(Content.Cursor).GetComponentInChildren<Cursor>();
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         DontDestroyOnLoad(Instance);
@@ -71,7 +75,7 @@ public class Main : MonoBehaviour
 
     private void Awake()
     {
-
+        UnityEngine.Cursor.visible = false;
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
