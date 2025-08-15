@@ -53,7 +53,7 @@ MonoBehaviour:
     - rid: 2684597491175260241
       type: {class: TagWave, ns: , asm: Assembly-CSharp}
       data:
-        Noise: {fileID: 0}
+        Noise: {fileID: 8300000, guid: 90b51369cd725a44e8ceeb9dc8c50909, type: 3}
         Min: 3
         Max: 30
         Enabled: 00000000000000

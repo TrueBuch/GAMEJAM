@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Notebook : MonoBehaviour, ISingleton, ISelectable
 {
+    public bool scary = false;
     public bool notebook = false;
     [SerializeField] private Image _pencil2;
     [SerializeField] private Image _pencil;
