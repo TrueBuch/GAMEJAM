@@ -62,8 +62,9 @@ public class Ending : MonoBehaviour, ISingleton
 
     public IEnumerator SecondEnding()
     {
-        yield return StartCoroutine(FlashAnimation(false));
 
+        yield return StartCoroutine(FlashAnimation(false));
+        Main.Get<Game>().Source.Stop();
         yield return new WaitForSecondsRealtime(1f);
         yield return StartCoroutine(FadeAnimation());
 
@@ -87,6 +88,7 @@ public class Ending : MonoBehaviour, ISingleton
         yield return new WaitUntil(() => !subs.IsPlaying);
 
         Main.Get<Game>().Source.panStereo = 0f;
+        Main.Get<Game>().Source.volume = 0.1f;
         Main.Get<Game>().Source.PlayOneShot(Main.Get<Game>().FinalNoise);
         yield return new WaitForSecondsRealtime(5f);
         subs.TypeByKey(Voice.DOCTOR2, true, "ending_2_2C_3");
@@ -94,8 +96,8 @@ public class Ending : MonoBehaviour, ISingleton
         subs.TypeByKey(Voice.DOCTOR1, true, "ending_2_1C_4");
         yield return new WaitUntil(() => !subs.IsPlaying);
         yield return new WaitForSecondsRealtime(2f);
-        subs.TypeByKey(Voice.SPEC, true, ".. .--. .- ... .. -... ---  --.. .-  .. --. .-. ..-");
-
+        subs.TypeByKey(Voice.SPEC, false, "... .--. .- ... .. -... --- --.. .- .. --. .-. ..-");
+        yield return new WaitUntil(() => !subs.IsPlaying);
 
         yield return new WaitForSecondsRealtime(5f);
         Main.SceneTransition.SwitchToScene("Menu");

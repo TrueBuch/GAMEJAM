@@ -423,7 +423,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
             IsPlaying = false;
             Main.Get<Game>().StartCoroutine(OnChanged(oldClip, newClip));
         }
-
+        
         Main.Get<Notebook>().notebook = true;
     }
 }
@@ -582,7 +582,7 @@ public class FirstDon : Event, IOnDonChanged
     }
 }
 
-public class SecondDon : Event, IOnDonChanged
+public class SecondDon : Event, IOnDonChanged, IOnGameStarted
 {
     private bool _invoked = false;
     public IEnumerator OnStarted()
@@ -634,6 +634,7 @@ public class FourthDon : Event, IOnDonChanged, IOnGameStarted
         _invoked = true;
         yield return new WaitForSecondsRealtime(8f);
         var subs = Main.Get<Subtitles>();
+        Main.Get<CanvasChanger>().ChangeCanvas(1);
         subs.TypeByKey(Voice.MONSTER, true, "last_din");
         yield return new WaitUntil(() => !subs.IsPlaying);
         subs.TypeByKey(Voice.MONSTER, true, "last_din_1");
@@ -642,7 +643,6 @@ public class FourthDon : Event, IOnDonChanged, IOnGameStarted
         Main.Get<Game>().MonsterSays = true;
         yield return new WaitUntil(() => !subs.IsPlaying);
 
-        Main.Get<CanvasChanger>().ChangeCanvas(1);
         yield return new WaitForSecondsRealtime(2f);
         subs.TypeByKey(Voice.MONSTER, true, "enter_code");
         yield return new WaitUntil(() => !subs.IsPlaying);
@@ -724,7 +724,7 @@ public class ListenMinus13Wave : Event, IOnClipChanged, IOnGameStarted
 
         subs.TypeByKey(Voice.MONSTER, true, "ending_2_found");
         yield return new WaitUntil(() => !subs.IsPlaying);
-        subs.TypeByKey(Voice.MONSTER, true, "ending_2_found");
+        subs.TypeByKey(Voice.MONSTER, true, "ending_2_found_1");
         yield return new WaitUntil(() => !subs.IsPlaying);
         yield return new WaitForSecondsRealtime(1f);
         Main.Get<Game>().Source.panStereo = Main.Get<CanvasChanger>().GetPanStereo(0);
