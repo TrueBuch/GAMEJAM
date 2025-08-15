@@ -119,7 +119,7 @@ public class OnListenStartMorse : Event, IOnClipChanged
         {
             IsPlaying = true;
             var subs = Main.Get<Subtitles>();
-            subs.Type(Voice.NONE, true, 0.25f, "--.");
+            subs.Type(Voice.NONE, true, 0.25f, "[ --.");
 
             yield return new WaitForSecondsRealtime(2f);
             if (!Main.Get<Radio>().IsCurrent("start_morse"))
@@ -153,7 +153,8 @@ public class OnListenStartMorse : Event, IOnClipChanged
                 IsPlaying = false;
                 yield break;
             }
-            subs.Type(Voice.NONE, true, 0.25f, ".-");
+            subs.Type(Voice.NONE, true, 0.25f, ".- ]");
+            yield return new WaitUntil(() => !subs.IsPlaying);
             if (!Main.Get<Radio>().IsCurrent("start_morse"))
             {
                 IsPlaying = false;
@@ -234,7 +235,7 @@ public class Listen990Wave : Event, IOnClipChanged
         {
             IsPlaying = true;
 
-            subs.Type(Voice.NONE, true, 0.25f, ".----");
+            subs.Type(Voice.NONE, true, 0.25f, "[ .----");
             yield return new WaitForSecondsRealtime(2f);
             if (!Main.Get<Radio>().IsCurrent("cosmos"))
             {
@@ -289,7 +290,8 @@ public class Listen990Wave : Event, IOnClipChanged
                 IsPlaying = false;
                 yield break;
             }
-            subs.Type(Voice.NONE, true, 0.25f, "...");
+            subs.Type(Voice.NONE, true, 0.25f, "... ]");
+            yield return new WaitUntil(() => !subs.IsPlaying);
             if (!Main.Get<Radio>().IsCurrent("cosmos"))
             {
                 IsPlaying = false;
@@ -360,7 +362,7 @@ public class Sw18MorzeListen : Event, IOnClipChanged
         if (!IsPlaying)
         {
             IsPlaying = true;
-            subs.Type(Voice.NONE, true, 0.25f, "-...");
+            subs.Type(Voice.NONE, true, 0.25f, "[ -...");
 
             yield return new WaitForSecondsRealtime(2f);
             if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
@@ -409,7 +411,8 @@ public class Sw18MorzeListen : Event, IOnClipChanged
                 yield break;
             }
 
-            subs.Type(Voice.NONE, true, 0.25f, "-");
+            subs.Type(Voice.NONE, true, 0.25f, "- ]");
+            yield return new WaitUntil(() => !subs.IsPlaying);
             if (!Main.Get<Radio>().IsCurrent("bipbip_morse"))
             {
                 IsPlaying = false;
