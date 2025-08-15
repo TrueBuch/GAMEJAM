@@ -53,15 +53,31 @@ MonoBehaviour:
     - rid: 2684597491175260241
       type: {class: TagWave, ns: , asm: Assembly-CSharp}
       data:
+        Noise: {fileID: 8300000, guid: 90b51369cd725a44e8ceeb9dc8c50909, type: 3}
         Min: 540
         Max: 1600
-        Enabled: 0000
+        Enabled: 00000101010101
         Keys:
         - cosmos
         - devil
+        - 
+        - 
+        - 
+        - 
+        - 
         Clips:
         - {fileID: 8300000, guid: cb76c9336097e1843b3a5869fcfe0b28, type: 3}
         - {fileID: 8300000, guid: 05d587744c29cdc43b3d196c104caecf, type: 3}
+        - {fileID: 8300000, guid: 3cd97aa6cb131684f829506b0a0962ea, type: 3}
+        - {fileID: 8300000, guid: de19a950d4541fe489531bddb2623c6a, type: 3}
+        - {fileID: 8300000, guid: bfe39f47c3704c4489f5b40875d0d1d7, type: 3}
+        - {fileID: 8300000, guid: bfe39f47c3704c4489f5b40875d0d1d7, type: 3}
+        - {fileID: 8300000, guid: ddd28baeb9a078948b2656143c04a5f6, type: 3}
         Ranges:
         - {x: 990, y: 1095}
         - {x: 666, y: 666}
+        - {x: 1300, y: 1450}
+        - {x: 540, y: 600}
+        - {x: 610, y: 665}
+        - {x: 667, y: 720}
+        - {x: 800, y: 930}

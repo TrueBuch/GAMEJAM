@@ -21,6 +21,7 @@ public class Game : MonoBehaviour, ISingleton
         Debug.Log("Game Started");
         var events = Main.EventSystem.FindAll<IOnGameStarted>();
         foreach (var e in events) StartCoroutine(e.OnStarted());
+
         //StartEnding(false);
     }
 
@@ -724,7 +725,9 @@ public class ListenMinus13Wave : Event, IOnClipChanged, IOnGameStarted
         yield return new WaitUntil(() => !subs.IsPlaying);
         yield return new WaitForSecondsRealtime(1f);
         Main.Get<Game>().Source.panStereo = Main.Get<CanvasChanger>().GetPanStereo(0);
-        Main.Get<Game>().Source.PlayOneShot(Main.Get<Game>().windowScary);
+        Main.Get<Game>().Source.loop = true;
+        Main.Get<Game>().Source.clip = Main.Get<Game>().windowScary;
+        Main.Get<Game>().Source.Play();
         Main.Get<Window>().StartScary();
     }
 }
