@@ -5,6 +5,7 @@ using UnityEngine;
 public static class Content
 {
     public static GameObject SceneTransition => Load<GameObject>("SceneTransition");
+    public static GameObject Cursor => Load<GameObject>("Cursor");
 
     private static T Load<T>(string path) where T : Object
     {
